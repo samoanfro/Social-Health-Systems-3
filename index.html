@@ -339,6 +339,57 @@ a { color: inherit; text-decoration: none; }
   color: rgba(255,255,255,0.55);
   font-weight: 500;
 }
+/* ============ READY NOW BAR ============ */
+.ready-bar {
+  padding: 16px var(--gutter);
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.ready-bar-text {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+.ready-bar-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.ready-bar-link {
+  padding: 7px 16px;
+  border-radius: 4px;
+  font-family: var(--f-display);
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ready-bar-link.primary {
+  background: var(--gold);
+  color: var(--ink);
+}
+.ready-bar-link.primary:hover { background: var(--bg); }
+.ready-bar-link.ghost {
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.ready-bar-link.ghost:hover { color: var(--bg); border-color: var(--bg); }
+@media (max-width: 640px) {
+  .ready-bar { padding: 12px var(--gutter); gap: 12px; }
+  .ready-bar-text { font-size: 9px; }
+  .ready-bar-link { font-size: 11px; padding: 6px 12px; }
+}
+
 /* ============ NAV ============ */
 .nav {
   position: fixed;
@@ -2918,6 +2969,14 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 </section>
+
+<div class="ready-bar">
+  <span class="ready-bar-text">Ready now?</span>
+  <div class="ready-bar-links">
+    <a href="#diagnostic" class="ready-bar-link primary">Get Your Score →</a>
+    <a href="contact.html" class="ready-bar-link ghost">Talk to Our Team</a>
+  </div>
+</div>
 
 <section class="route" id="research">
   <div class="route-inner">
