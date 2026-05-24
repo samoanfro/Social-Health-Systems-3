@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Contact — Social Health Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-2: #f7f7f5;
+  --bg-3: #eeeeea;
+  --ink: #0f1311;
+  --ink-2: #1d211f;
+  --ink-soft: #45494a;
+  --muted: #6e7372;
+  --muted-2: #a8aba8;
+  --line: rgba(15, 19, 17, 0.08);
+  --line-strong: rgba(15, 19, 17, 0.2);
+  --green: #0a5c44;
+  --green-2: #1a7d5f;
+  --green-soft: #d4e9df;
+  --gold: #b3853a;
+  --gold-soft: #f0e2c4;
+
+  --f-display: 'Inter Tight', system-ui, sans-serif;
+  --f-serif: 'Source Serif 4', Georgia, serif;
+  --f-sans: 'Inter Tight', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', monospace;
+
+  --max: 1320px;
+  --gutter: clamp(20px, 4vw, 64px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--f-sans); background: var(--bg); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px var(--gutter); display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--f-display); font-weight: 600; font-size: 20px; letter-spacing: -0.02em; }
+.brand-mark { width: 32px; height: 32px; }
+.brand-sub { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--green); display: block; margin-top: -2px; font-weight: 500; }
+.nav-back { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 600; }
+.nav-back:hover { color: var(--ink); }
+
+
+.page { padding: 160px var(--gutter) 80px; max-width: 960px; margin: 0 auto; }
+.page-eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 12px; margin-bottom: 28px; font-weight: 500; }
+.page-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--green); }
+.page-title { font-family: var(--f-display); font-weight: 500; font-size: clamp(36px, 5vw, 56px); line-height: 1.06; letter-spacing: -0.035em; margin-bottom: 16px; }
+.page-title em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.page-sub { font-size: 17px; color: var(--ink-soft); max-width: 560px; margin-bottom: 48px; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+@media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
+
+.form-group { margin-bottom: 20px; }
+.form-label { display: block; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); font-weight: 600; margin-bottom: 8px; }
+.form-input, .form-textarea {
+  width: 100%; padding: 14px 16px; border: 1px solid var(--line-strong); border-radius: 5px;
+  font-family: var(--f-sans); font-size: 15px; background: var(--bg-2); color: var(--ink);
+  transition: border-color 0.2s, background 0.2s; outline: none;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--green); background: var(--bg); }
+.form-textarea { min-height: 140px; resize: vertical; }
+.form-select {
+  width: 100%; padding: 14px 16px; border: 1px solid var(--line-strong); border-radius: 5px;
+  font-family: var(--f-sans); font-size: 15px; background: var(--bg-2); color: var(--ink);
+  appearance: none; cursor: pointer; outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e7372' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+}
+.form-select:focus { border-color: var(--green); background: var(--bg); }
+
+.btn-submit {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 32px; background: var(--green); color: var(--bg); border-radius: 5px;
+  font-family: var(--f-display); font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: all 0.25s; border: none; width: 100%;
+  justify-content: center;
+}
+.btn-submit:hover { background: var(--ink); }
+
+.contact-info { padding-top: 8px; }
+.contact-info h3 {
+  font-family: var(--f-display); font-weight: 600; font-size: 18px; letter-spacing: -0.015em;
+  margin-bottom: 20px; color: var(--ink);
+}
+.info-item {
+  display: flex; gap: 14px; align-items: flex-start; margin-bottom: 24px;
+  padding-bottom: 24px; border-bottom: 1px solid var(--line);
+}
+.info-icon {
+  width: 36px; height: 36px; background: var(--green-soft); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.info-icon svg { width: 18px; height: 18px; color: var(--green); }
+.info-label { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+.info-value { font-size: 15px; color: var(--ink); line-height: 1.5; }
+.info-value a { color: var(--green); border-bottom: 1px solid var(--green); }
+.info-value a:hover { color: var(--ink); border-color: var(--ink); }
+
+.form-success {
+  display: none; text-align: center; padding: 60px 20px;
+  background: var(--green-soft); border-radius: 8px; border: 1px solid var(--green);
+}
+.form-success.show { display: block; }
+.form-success h3 { font-family: var(--f-display); font-weight: 600; font-size: 24px; color: var(--green); margin-bottom: 12px; }
+.form-success p { color: var(--ink-soft); font-size: 15px; }
+
+.links-section { margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--line); }
+.links-section h3 { font-family: var(--f-display); font-weight: 600; font-size: 18px; margin-bottom: 20px; }
+.links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 640px) { .links-grid { grid-template-columns: 1fr; } }
+.link-card {
+  border: 1px solid var(--line); border-radius: 6px; padding: 20px; transition: all 0.25s;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.link-card:hover { border-color: var(--green); background: var(--bg-2); transform: translateY(-2px); }
+.link-card-tag { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.link-card-title { font-family: var(--f-display); font-weight: 600; font-size: 16px; color: var(--ink); }
+.link-card-arrow { color: var(--muted-2); font-size: 14px; margin-top: auto; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none"><circle cx="11" cy="11" r="5" stroke="#0f1311" stroke-width="1.6"/><circle cx="21" cy="21" r="5" stroke="#0a5c44" stroke-width="1.6"/><line x1="14.5" y1="14.5" x2="17.5" y2="17.5" stroke="#0f1311" stroke-width="1.6"/></svg></span>
+    <span>SHs <span class="brand-sub">Social Health Systems</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="page">
+  <div class="page-eyebrow">Get in Touch</div>
+  <h1 class="page-title">Start a <em>conversation.</em></h1>
+  <p class="page-sub">Whether you're exploring accreditation, partnership, or just curious about Social Health — we'd like to hear from you.</p>
+
+  <div class="contact-grid">
+    <div>
+      <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <!-- SETUP: Replace YOUR_FORM_ID above with your Formspree endpoint, or swap for Google Forms action URL -->
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" name="name" class="form-input" placeholder="Full name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-input" placeholder="you@organization.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Organization</label>
+          <input type="text" name="organization" class="form-input" placeholder="Company, school, or community">
+        </div>
+        <div class="form-group">
+          <label class="form-label">I'm interested in</label>
+          <select name="interest" class="form-select" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="accreditation">SHa Accreditation</option>
+            <option value="schools">Social Health for Schools</option>
+            <option value="enterprise">Enterprise / HR Integration</option>
+            <option value="healthcare">Healthcare Partnership</option>
+            <option value="community">Community Programming</option>
+            <option value="speaking">Speaking / Keynote</option>
+            <option value="partnership">Strategic Partnership</option>
+            <option value="media">Media / Press Inquiry</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea name="message" class="form-textarea" placeholder="Tell us what you're working on, what brought you here, or what question you're sitting with."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message →</button>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <h3>✓ Message sent.</h3>
+        <p>We'll respond within 48 hours. In the meantime, take the <a href="index.html#diagnostic" style="color:var(--green);">Social Health diagnostic</a> — it's 60 seconds and free.</p>
+      </div>
+    </div>
+
+    <div class="contact-info">
+      <h3>Other ways to connect</h3>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="info-label">Email</div><div class="info-value"><a href="mailto:info@socialhealthsystems.com">info@socialhealthsystems.com</a></div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 6a6 6 0 0 0-6 6M12 6a6 6 0 0 1 6 6M12 18a6 6 0 0 0 6-6M12 18a6 6 0 0 1-6-6"/></svg></div>
+        <div><div class="info-label">Podcast</div><div class="info-value"><a href="https://www.instagram.com/og.therapy" target="_blank" rel="noopener">OG Therapy on Instagram</a></div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
+        <div><div class="info-label">TEDx Talk</div><div class="info-value"><a href="https://www.ted.com/talks/david_kozlowski_be_a_better_parent_by_partnering_with_your_teen" target="_blank" rel="noopener">Watch: "Be a Better Parent"</a></div></div>
+      </div>
+      <div class="info-item" style="border-bottom:none;">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div><div class="info-label">Book a Call</div><div class="info-value">Schedule a 30-minute Social Health conversation directly on our <a href="#">calendar →</a></div>
+        <!-- SETUP: Replace # above with your Google Calendar Appointment Scheduling link -->
+        </div>
+      </div>
+
+      <div class="links-section">
+        <h3>Quick links</h3>
+        <div class="links-grid">
+          <a href="index.html#diagnostic" class="link-card">
+            <span class="link-card-tag">60 seconds</span>
+            <span class="link-card-title">Social Health Diagnostic</span>
+            <span class="link-card-arrow">→</span>
+          </a>
+          <a href="accreditation.html" class="link-card">
+            <span class="link-card-tag">For organizations</span>
+            <span class="link-card-title">SHa Accreditation</span>
+            <span class="link-card-arrow">→</span>
+          </a>
+          <a href="https://a.co/d/08WzEr9A" target="_blank" rel="noopener" class="link-card">
+            <span class="link-card-tag">Book</span>
+            <span class="link-card-title">Youth of the Nation</span>
+            <span class="link-card-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--bg-2);padding:40px var(--gutter);text-align:center;font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;color:var(--muted);border-top:1px solid var(--line);">
+  <p>© 2011–2026 SHs — Social Health Systems · <a href="index.html" style="color:var(--green);">Home</a> · Connection Is Infrastructure™</p>
+</footer>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  // If no Formspree ID is set, prevent default and show success
+  if (this.action.includes('YOUR_FORM_ID')) {
+    e.preventDefault();
+    const data = new FormData(this);
+    const subject = encodeURIComponent('SHs Contact: ' + (data.get('interest') || 'General'));
+    const body = encodeURIComponent('Name: ' + data.get('name') + '\nOrg: ' + data.get('organization') + '\nInterest: ' + data.get('interest') + '\n\n' + data.get('message'));
+    window.open('mailto:info@socialhealthsystems.com?subject=' + subject + '&body=' + body);
+    this.style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>The Hidden Cost of Disconnected Teams — Social Health Systems</title>
+<meta name="description" content="What Gallup data really tells us about manager-employee relationships and the $360B productivity gap.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-2: #f7f7f5;
+  --bg-3: #eeeeea;
+  --ink: #0f1311;
+  --ink-2: #1d211f;
+  --ink-soft: #45494a;
+  --muted: #6e7372;
+  --muted-2: #a8aba8;
+  --line: rgba(15, 19, 17, 0.08);
+  --line-strong: rgba(15, 19, 17, 0.2);
+  --green: #0a5c44;
+  --green-2: #1a7d5f;
+  --green-soft: #d4e9df;
+  --gold: #b3853a;
+  --gold-soft: #f0e2c4;
+
+  --f-display: 'Inter Tight', system-ui, sans-serif;
+  --f-serif: 'Source Serif 4', Georgia, serif;
+  --f-sans: 'Inter Tight', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', monospace;
+
+  --max: 1320px;
+  --gutter: clamp(20px, 4vw, 64px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px var(--gutter);
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--f-display); font-weight: 600; font-size: 20px; letter-spacing: -0.02em;
+}
+.brand-mark { width: 32px; height: 32px; }
+.brand-sub { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--green); display: block; margin-top: -2px; font-weight: 500; }
+.nav-back {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 8px;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--ink); }
+
+/* PAGE HERO */
+.page-hero {
+  padding: 160px var(--gutter) 80px;
+  border-bottom: 1px solid var(--line);
+  max-width: 100%;
+}
+.page-hero-inner { max-width: var(--max); margin: 0 auto; }
+.page-eyebrow {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--green); display: flex; align-items: center; gap: 12px; margin-bottom: 28px; font-weight: 500;
+}
+.page-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--green); }
+.page-title {
+  font-family: var(--f-display); font-weight: 500;
+  font-size: clamp(36px, 5vw, 64px); line-height: 1.06; letter-spacing: -0.035em; margin-bottom: 24px;
+  max-width: 900px;
+}
+.page-title em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.page-sub {
+  font-size: clamp(16px, 1.3vw, 19px); color: var(--ink-soft); max-width: 640px; line-height: 1.65;
+}
+.page-sub strong { color: var(--ink); font-weight: 600; }
+
+/* CONTENT SECTIONS */
+.content { max-width: var(--max); margin: 0 auto; padding: 80px var(--gutter); }
+.content h2 {
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: -0.025em; margin-bottom: 20px; line-height: 1.15; color: var(--ink);
+}
+.content h2 em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.content h3 {
+  font-family: var(--f-display); font-weight: 600; font-size: 20px; letter-spacing: -0.015em;
+  margin: 36px 0 12px; color: var(--ink);
+}
+.content p { margin-bottom: 18px; color: var(--ink-soft); max-width: 720px; }
+.content p strong { color: var(--ink); font-weight: 600; }
+.content blockquote {
+  font-family: var(--f-serif); font-style: italic; font-size: 20px; line-height: 1.45;
+  color: var(--ink); margin: 32px 0; padding-left: 20px; border-left: 3px solid var(--gold);
+  max-width: 640px;
+}
+.content blockquote em { color: var(--green); }
+.content .stat-highlight {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-family: var(--f-display); font-weight: 500; font-size: 48px; color: var(--green);
+  letter-spacing: -0.04em; margin: 24px 0;
+}
+.content .stat-highlight small { font-size: 16px; color: var(--ink-soft); font-weight: 400; }
+.content .section-divider {
+  width: 60px; height: 2px; background: var(--gold); margin: 48px 0;
+}
+.content .tag {
+  display: inline-block; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold); font-weight: 600;
+  background: var(--gold-soft); padding: 5px 10px; border-radius: 3px; margin-bottom: 20px;
+}
+.content ul { margin-bottom: 18px; padding-left: 20px; color: var(--ink-soft); }
+.content li { margin-bottom: 8px; line-height: 1.6; }
+
+/* CTA BAND */
+.cta-band {
+  padding: 80px var(--gutter);
+  background: var(--ink); color: var(--bg); text-align: center;
+}
+.cta-band-inner { max-width: 640px; margin: 0 auto; }
+.cta-band h2 {
+  font-family: var(--f-display); font-weight: 500;
+  font-size: clamp(28px, 3.5vw, 44px); letter-spacing: -0.03em; margin-bottom: 16px;
+  color: var(--bg); line-height: 1.1;
+}
+.cta-band h2 em { color: var(--gold); font-family: var(--f-serif); font-style: italic; font-weight: 400; }
+.cta-band p { color: rgba(255,255,255,0.7); margin-bottom: 28px; font-size: 16px; }
+.cta-band .btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 24px; border-radius: 4px; font-size: 14px; font-weight: 600;
+  background: var(--gold); color: var(--ink); transition: all 0.25s;
+}
+.cta-band .btn:hover { background: var(--bg); }
+
+/* FOOTER */
+.footer {
+  background: var(--bg-2); padding: 40px var(--gutter); text-align: center;
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+.footer a { color: var(--green); transition: color 0.2s; }
+.footer a:hover { color: var(--ink); }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .page-hero { padding: 120px var(--gutter) 60px; }
+  .page-title { font-size: 32px; }
+  .content { padding: 60px var(--gutter); }
+  .content h2 { font-size: 24px; }
+  .content blockquote { font-size: 17px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none"><circle cx="11" cy="11" r="5" stroke="#0f1311" stroke-width="1.6"/><circle cx="21" cy="21" r="5" stroke="#0a5c44" stroke-width="1.6"/><line x1="14.5" y1="14.5" x2="17.5" y2="17.5" stroke="#0f1311" stroke-width="1.6"/></svg></span>
+    <span>SHs <span class="brand-sub">Social Health Systems</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Workplace Data · Analysis</div>
+    <h1 class="page-title">The hidden cost of disconnected teams: <em>a $360B problem.</em></h1>
+    <p class="page-sub">What Gallup data really tells us about manager-employee relationships and the productivity gap that no wellness app can fix.</p>
+  </div>
+</section>
+
+<div class="content">
+  <div class="tag">5 min read</div>
+
+  <p>Every year, Gallup publishes its State of the Global Workplace report. And every year, the same number demands attention: <strong>the U.S. loses approximately $360 billion annually in productivity</strong> due to disengaged employees and poor manager-employee relationships.</p>
+
+  <p>That's not a mental health statistic. It's not a technology gap. It's a <strong>relational infrastructure failure</strong> — and it has a name: the Social Connection Collapse.</p>
+
+  <div class="section-divider"></div>
+
+  <h2>What the data <em>actually says.</em></h2>
+  <p>Gallup's research consistently shows that the single largest determinant of employee engagement is <strong>the quality of the relationship with their direct manager.</strong> Not compensation. Not perks. Not mission statements. The relationship.</p>
+  <p>Harvard Business Review corroborates this: managers who invest consistently in relational quality generate teams with <strong>50% lower turnover, 56% higher performance ratings, and 38% higher engagement scores.</strong></p>
+  <p>SHRM data adds the cost dimension: voluntary turnover driven by poor relational culture costs <strong>1.5–2x an employee's annual salary</strong> per departure.</p>
+  <p>The math is simple. The solution is not.</p>
+
+  <div class="section-divider"></div>
+
+  <h2>Why training doesn't <em>fix it.</em></h2>
+  <p>Organizations spend roughly $90 billion annually on corporate training in the U.S. And yet engagement numbers haven't meaningfully moved in 20 years. Why?</p>
+  <p><strong>Because training builds knowledge. It doesn't build behavior.</strong></p>
+  <p>A manager can attend a leadership workshop and learn that psychological safety matters. They can take a course on active listening. They can read a book on emotional intelligence. And on Monday morning, under pressure, with a deadline looming and a difficult conversation ahead, they will default to whatever behavioral pattern they've been practicing for years.</p>
+
+  <blockquote>"Leadership development builds mindset. Execution breaks down in real interactions. The issue is not knowledge. It is the absence of a <em>behavioral system</em> that guides day-to-day leadership actions."</blockquote>
+
+  <div class="section-divider"></div>
+
+  <h2>The SHs <em>alternative.</em></h2>
+  <p>Social Health Systems addresses the $360B problem at its root: <strong>the relationship between manager and employee, operationalized as a daily behavioral system.</strong></p>
+  <p>Instead of annual workshops, SHs embeds connection behaviors into the daily operating rhythm:</p>
+  <ul>
+    <li>Every 1:1 starts with <strong>Connection Before Concern</strong> — two minutes of human-first check-in before task review</li>
+    <li>Every difficult conversation uses <strong>Statements Before Questions</strong> — grounding statements that reduce defensiveness before inquiry begins</li>
+    <li>Every team meeting includes a <strong>Connection Currency deposit</strong> — a deliberate micro-behavior that builds relational trust</li>
+    <li>Every conflict resolution follows the <strong>Relational Response</strong> protocol — repair the relationship first, then process the system failure</li>
+  </ul>
+  <p>This isn't theory. These behaviors are trainable, observable, and measurable. And they compound over time — creating what we call <strong>Connection Confidence</strong>: a team's earned belief in its ability to navigate relationships under pressure.</p>
+</div>
+
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <h2>Ready to build your <em>Social Health?</em></h2>
+    <p>Take the 60-second diagnostic, explore accreditation, or talk to our team.</p>
+    <a href="index.html#diagnostic" class="btn">Get Your Social Health Score →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2011–2026 SHs — Social Health Systems &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; Connection Is Infrastructure™</p>
+</footer>
+
+</body>
+</html>

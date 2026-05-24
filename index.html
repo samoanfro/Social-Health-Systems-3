@@ -1,0 +1,3816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Health Systems — Connection Is Infrastructure</title>
+<meta name="description" content="We are living through a Social Connection Collapse. Social Health Systems builds the relational infrastructure for schools, organizations, healthcare, and communities.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Social Health Systems — Connection Is Infrastructure">
+<meta property="og:description" content="We are living through a Social Connection Collapse. SHs builds the relational infrastructure organizations need — measurable, trainable, accreditable.">
+<meta property="og:site_name" content="Social Health Systems">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Social Health Systems — Connection Is Infrastructure">
+<meta name="twitter:description" content="We are living through a Social Connection Collapse. SHs builds the relational infrastructure organizations need.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-2: #f7f7f5;
+  --bg-3: #eeeeea;
+  --ink: #0f1311;
+  --ink-2: #1d211f;
+  --ink-soft: #45494a;
+  --muted: #6e7372;
+  --muted-2: #a8aba8;
+  --line: rgba(15, 19, 17, 0.08);
+  --line-strong: rgba(15, 19, 17, 0.2);
+  --green: #0a5c44;
+  --green-2: #1a7d5f;
+  --green-soft: #d4e9df;
+  --gold: #b3853a;
+  --gold-soft: #f0e2c4;
+
+  --f-display: 'Inter Tight', system-ui, sans-serif;
+  --f-serif: 'Source Serif 4', Georgia, serif;
+  --f-sans: 'Inter Tight', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', monospace;
+
+  --max: 1320px;
+  --gutter: clamp(20px, 4vw, 64px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* ============ READING PROGRESS BAR ============ */
+.reading-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 101;
+  background: transparent;
+  pointer-events: none;
+}
+.reading-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green) 0%, var(--gold) 100%);
+  width: 0;
+  transition: width 0.15s ease;
+  box-shadow: 0 1px 6px rgba(10, 92, 68, 0.3);
+}
+
+/* ============ SECTION COUNTER ============ */
+.section-counter {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 80;
+  background: rgba(15, 19, 17, 0.92);
+  color: var(--bg);
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--f-mono);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  max-width: 300px;
+}
+.section-counter.visible { opacity: 1; transform: translateY(0); }
+.section-counter-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.section-counter-denom {
+  color: rgba(255,255,255,0.4);
+  margin-left: 2px;
+}
+.section-counter-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255,255,255,0.2);
+}
+@media (max-width: 640px) {
+  .section-counter { bottom: 80px; right: 16px; padding: 10px 14px; }
+  .section-counter-label { display: none; }
+}
+
+/* ============ SAVE YOUR PLACE PROMPT ============ */
+.save-prompt {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 85;
+  max-width: 360px;
+  background: var(--bg);
+  border: 1px solid var(--green);
+  border-radius: 10px;
+  padding: 20px 22px;
+  box-shadow: 0 16px 40px rgba(15, 19, 17, 0.12);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+.save-prompt.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.save-prompt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.save-prompt-tag {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.save-prompt-close {
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.save-prompt-close:hover { background: var(--bg-2); color: var(--ink); }
+.save-prompt-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.save-prompt-sub {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.save-prompt-form {
+  display: flex;
+  gap: 6px;
+}
+.save-prompt-input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  font-family: var(--f-sans);
+  font-size: 13px;
+  background: var(--bg-2);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.save-prompt-input:focus { border-color: var(--green); background: var(--bg); }
+.save-prompt-btn {
+  padding: 9px 14px;
+  background: var(--green);
+  color: var(--bg);
+  border-radius: 5px;
+  font-family: var(--f-display);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.save-prompt-btn:hover { background: var(--ink); }
+.save-prompt.success .save-prompt-form { display: none; }
+.save-prompt-success {
+  display: none;
+  font-family: var(--f-display);
+  font-size: 13px;
+  color: var(--green);
+  font-weight: 600;
+}
+.save-prompt.success .save-prompt-success { display: block; }
+@media (max-width: 640px) {
+  .save-prompt { left: 12px; right: 12px; bottom: 80px; max-width: none; }
+}
+
+/* ============ MICRO-CALLOUTS ============ */
+.callout {
+  background: var(--gold-soft);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  padding: 14px 20px;
+  max-width: 540px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.callout-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--gold);
+}
+.callout strong { font-style: normal; font-weight: 600; color: var(--green); }
+
+.callout-band {
+  padding: 60px var(--gutter);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ============ ANIMATED STAT NUMBERS ============ */
+.stat-num.counting { color: var(--gold); }
+
+/* ============ BRAND EASTER EGG ============ */
+.brand-egg-toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  z-index: 102;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 18px 28px;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  max-width: 480px;
+  border: 1px solid var(--gold);
+}
+.brand-egg-toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.brand-egg-quote {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--gold);
+  text-align: center;
+}
+.brand-egg-cite {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+/* ============ NAV ============ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  transition: padding 0.3s ease;
+}
+.nav.scrolled { padding: 12px var(--gutter); }
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.brand-mark { width: 32px; height: 32px; cursor: pointer; transition: transform 0.2s ease; }
+.brand-mark:hover { transform: scale(1.08) rotate(-5deg); }
+.brand-sub {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  display: block;
+  margin-top: -2px;
+  font-weight: 500;
+}
+.nav-links { display: flex; gap: 32px; font-size: 14px; color: var(--ink-soft); font-weight: 500; }
+.nav-links a { transition: color 0.2s; }
+.nav-links a:hover { color: var(--green); }
+.nav-cta {
+  padding: 11px 22px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--green);
+  color: var(--bg);
+  transition: all 0.25s;
+}
+.nav-cta:hover { background: var(--ink); }
+@media (max-width: 940px) { .nav-links { display: none; } }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 92vh;
+  padding: 140px var(--gutter) 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.hero-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 940px) { .hero-inner { grid-template-columns: 1fr; gap: 50px; } }
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.2s forwards;
+  font-weight: 500;
+}
+.eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--green); }
+
+.hero-title {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(40px, 6.5vw, 88px);
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  margin-bottom: 32px;
+  color: var(--ink);
+}
+.hero-title em {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--green);
+}
+.hero-title .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroWord 0.85s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+.hero-sub {
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-weight: 400;
+  color: var(--ink-soft);
+  max-width: 560px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 1s 1.3s forwards;
+}
+.hero-sub strong { color: var(--ink); font-weight: 600; }
+
+.hero-actions {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 1.5s forwards;
+}
+
+.btn {
+  padding: 14px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.005em;
+}
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: var(--green); }
+.btn-ghost { border: 1px solid var(--line-strong); color: var(--ink); }
+.btn-ghost:hover { background: var(--bg-2); border-color: var(--ink); }
+.btn-arrow { transition: transform 0.25s; }
+.btn:hover .btn-arrow { transform: translateX(3px); }
+
+.hero-visual {
+  opacity: 0;
+  animation: fadeUp 1s 1.4s forwards;
+}
+.hero-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px;
+  position: relative;
+}
+.hero-card-tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.hero-card-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.hero-card-stat {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.hero-card-stat-label {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.hero-card-bar {
+  height: 6px;
+  background: var(--bg-3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.hero-card-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--green-2));
+  border-radius: 3px;
+  width: 0;
+  animation: fillBar 1.6s 2s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.hero-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+.hero-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 600;
+}
+.hero-card-link:hover { color: var(--ink); }
+
+.founder-portrait {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(15, 19, 17, 0.08);
+}
+.founder-portrait-sm {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(15, 19, 17, 0.12);
+  border: 2px solid var(--bg);
+}
+
+.hero-byline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.hero-byline .founder-name {
+  margin-bottom: 0;
+}
+.hero-byline .founder-title {
+  margin-bottom: 0;
+}
+.hero-byline-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.founder-portrait svg { width: 100%; height: 100%; display: block; }
+.founder-name {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.founder-title {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+}
+.founder-quote {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 2px solid var(--gold);
+  font-weight: 400;
+}
+.founder-quote em { color: var(--green); font-style: italic; }
+.founder-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.founder-meta > div { display: flex; flex-direction: column; gap: 2px; }
+.founder-meta-num {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--green);
+}
+.founder-meta-lbl {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+@keyframes fillBar { to { width: 75%; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes heroWord { to { opacity: 1; transform: translateY(0); } }
+
+/* ============ TRUST BAR ============ */
+.trustbar {
+  padding: 40px var(--gutter);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.trustbar-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.trustbar-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+.trustbar-items {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  font-family: var(--f-display);
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-size: 13px;
+  letter-spacing: -0.005em;
+}
+.trustbar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  transition: color 0.2s ease;
+}
+.trustbar-item:hover { color: var(--green); }
+.trustbar-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .trustbar-items { gap: 18px; }
+  .trustbar-item { font-size: 12px; }
+}
+
+/* ============ SELF-ROUTE ============ */
+.route {
+  padding: 100px var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.route-inner { max-width: var(--max); margin: 0 auto; }
+.route-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.route-h {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(30px, 3.6vw, 48px);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  max-width: 640px;
+}
+.route-h em { color: var(--green); font-style: italic; font-family: var(--f-serif); font-weight: 400; }
+.route-sub {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 820px) { .route-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .route-grid { grid-template-columns: 1fr; } }
+
+.route-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 24px 32px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 240px;
+  position: relative;
+}
+.route-card:hover {
+  border-color: var(--green);
+  background: var(--bg-2);
+  transform: translateY(-2px);
+}
+.route-card:hover .route-arrow { transform: translate(3px, -3px); color: var(--green); }
+.route-num {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--green);
+  font-weight: 500;
+}
+.route-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+.route-body {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-top: auto;
+}
+.route-arrow {
+  position: absolute;
+  top: 24px; right: 24px;
+  font-size: 18px;
+  color: var(--muted-2);
+  transition: all 0.25s ease;
+  font-weight: 400;
+}
+
+/* ============ STATS ============ */
+.statband {
+  padding: 110px var(--gutter);
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.statband-inner { max-width: var(--max); margin: 0 auto; }
+.statband-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 36px;
+  font-weight: 500;
+}
+.statband-label::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+.statband-headline {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  max-width: 1000px;
+  margin-bottom: 72px;
+}
+.statband-headline em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.stat {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 36px 28px;
+  position: relative;
+  transition: all 0.25s;
+}
+.stat:hover { border-color: var(--green); transform: translateY(-2px); }
+.stat-num {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(48px, 5.5vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.stat-num .sup {
+  font-size: 0.32em;
+  vertical-align: super;
+  font-weight: 600;
+  color: var(--gold);
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+.stat-label { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+.stat-src {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.stat:hover .stat-link { color: var(--green); transform: translate(2px, -2px); }
+.stat-link { color: var(--muted-2); transition: all 0.25s ease; font-size: 11px; }
+.stats-footnote { display: none; }
+
+.fn-ref {
+  font-family: var(--f-mono);
+  font-size: 0.32em;
+  vertical-align: super;
+  color: var(--gold);
+  margin-left: 2px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.fn-ref a { color: inherit; transition: color 0.2s; }
+.fn-ref a:hover { color: var(--green); }
+
+.footnotes {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.footnotes-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.footnotes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+}
+@media (max-width: 820px) { .footnotes-list { grid-template-columns: 1fr; } }
+.footnotes-list li {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  display: flex;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 100px;
+}
+.footnotes-list li:target { background: var(--gold-soft); border-color: var(--gold); }
+.fn-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.footnotes-list em { color: var(--ink); font-style: italic; }
+.footnotes-list a { color: var(--green); border-bottom: 1px solid var(--green); padding-bottom: 1px; transition: all 0.2s; }
+.footnotes-list a:hover { color: var(--ink); border-color: var(--ink); }
+@media (max-width: 820px) { .stats { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .stats { grid-template-columns: 1fr; } }
+
+/* ============ REFRAME ============ */
+.reframe {
+  padding: 120px var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.reframe-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 940px) { .reframe-inner { grid-template-columns: 1fr; } }
+
+.reframe-h {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  margin-bottom: 32px;
+}
+.reframe-h .crossed {
+  position: relative;
+  color: var(--muted);
+  font-style: italic;
+  font-family: var(--f-serif);
+  font-weight: 400;
+}
+.reframe-h .crossed::after {
+  content: '';
+  position: absolute;
+  top: 53%; left: -2%;
+  width: 104%; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.reframe-h .crossed.in::after { animation: strikeOut 0.9s cubic-bezier(.2,.7,.2,1) forwards; }
+.reframe-h .replaced { color: var(--green); font-style: italic; font-family: var(--f-serif); font-weight: 400; }
+@keyframes strikeOut { to { transform: scaleX(1); } }
+
+.reframe-body {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+.reframe-body strong { color: var(--ink); font-weight: 600; }
+
+.vocab {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.vocab-item {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  text-align: left;
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  letter-spacing: -0.005em;
+}
+.vocab-item:hover {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+.vocab-item.open {
+  border-color: var(--green);
+  background: var(--bg-2);
+}
+.vocab-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.vocab-plus {
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 500;
+  transition: transform 0.3s ease;
+}
+.vocab-item.open .vocab-plus { transform: rotate(45deg); }
+.vocab-detail {
+  max-height: 0;
+  overflow: hidden;
+  font-family: var(--f-sans);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  font-weight: 400;
+  letter-spacing: 0;
+  transition: max-height 0.4s ease, margin-top 0.3s ease;
+}
+.vocab-item.open .vocab-detail { max-height: 200px; margin-top: 10px; }
+
+.reframe-visual {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 500px;
+  margin-left: auto;
+}
+
+/* ============ PILLARS ============ */
+.pillars {
+  padding: 120px var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.pillars-inner { max-width: var(--max); margin: 0 auto; }
+.pillars-head {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+@media (max-width: 820px) { .pillars-head { grid-template-columns: 1fr; gap: 28px; } }
+
+.section-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--green);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+.section-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--green); }
+
+.section-title {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(34px, 4.5vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+.section-title em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.section-intro {
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 460px;
+}
+.section-intro strong { color: var(--ink); font-weight: 600; }
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 940px) { .pillar-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .pillar-grid { grid-template-columns: 1fr; } }
+
+.pillar {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 32px 26px 36px;
+  transition: all 0.25s;
+}
+.pillar:hover { border-color: var(--green); background: var(--bg-2); }
+
+.pillar-icon-wrap {
+  width: 44px; height: 44px;
+  background: var(--green-soft);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.pillar-icon { width: 22px; height: 22px; color: var(--green); }
+.pillar-num {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--green);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.pillar-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  min-height: 48px;
+}
+.pillar-body { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); }
+
+/* ============ COMPARISON TABLE ============ */
+.compare {
+  padding: 120px var(--gutter);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.compare-inner { max-width: var(--max); margin: 0 auto; }
+.compare-head {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+@media (max-width: 820px) { .compare-head { grid-template-columns: 1fr; gap: 28px; } }
+
+.compare-table-wrap {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+  margin-bottom: 28px;
+  overflow-x: auto;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 720px;
+}
+.compare-table thead th {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 22px 18px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+  vertical-align: bottom;
+}
+.compare-table thead th.ours {
+  color: var(--green);
+  background: var(--green-soft);
+}
+.compare-table tbody th {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 13px;
+  text-align: left;
+  padding: 18px;
+  color: var(--ink);
+  background: var(--bg-2);
+  border-right: 1px solid var(--line);
+  letter-spacing: -0.01em;
+  width: 17%;
+}
+.compare-table tbody td {
+  padding: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  line-height: 1.5;
+  vertical-align: top;
+}
+.compare-table tbody td.ours {
+  font-family: var(--f-display);
+  font-weight: 600;
+  color: var(--green);
+  background: rgba(212, 233, 223, 0.35);
+  border-left: 1px solid var(--green-soft);
+  letter-spacing: -0.005em;
+}
+.compare-table tbody tr:hover td:not(.ours) { background: var(--bg-2); }
+.compare-note {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 720px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* ============ STORY TIMELINE ============ */
+.story {
+  padding: 120px var(--gutter);
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.story-inner { max-width: var(--max); margin: 0 auto; }
+.story-head {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+@media (max-width: 820px) { .story-head { grid-template-columns: 1fr; } }
+
+.story-title {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(32px, 4.4vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+.story-title em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.story-sub {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  max-width: 420px;
+}
+
+.timeline-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  position: relative;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 30px; left: 0; right: 0;
+  height: 2px;
+  background: var(--line);
+}
+@media (max-width: 820px) { .timeline-track { grid-template-columns: 1fr; } .timeline-track::before { display: none; } }
+
+.tl-step {
+  padding: 0 18px 0 0;
+  position: relative;
+}
+.tl-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  border: 2px solid var(--green);
+  margin-bottom: 30px;
+  margin-top: 22px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.25s ease;
+}
+.tl-step:hover .tl-dot { background: var(--green); transform: scale(1.2); }
+.tl-step.now .tl-dot { background: var(--gold); border-color: var(--gold); }
+.tl-year {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--green);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.tl-headline {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+}
+.tl-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+@media (max-width: 820px) {
+  .tl-step { padding: 0 0 30px 0; border-left: 1px solid var(--line); padding-left: 22px; }
+  .tl-dot { position: absolute; left: -8px; top: 0; margin: 0; }
+}
+
+/* ============ MEET THE FOUNDER ============ */
+.founder {
+  padding: 130px var(--gutter);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.founder-inner { max-width: var(--max); margin: 0 auto; }
+.founder-head {
+  margin-bottom: 64px;
+  max-width: 920px;
+}
+.founder-head .section-title { margin-top: 8px; }
+
+.founder-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+@media (max-width: 940px) { .founder-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.founder-portrait-lg {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 24px 60px rgba(15, 19, 17, 0.1);
+}
+.founder-portrait-lg svg { width: 100%; height: 100%; display: block; }
+.founder-portrait-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 28px;
+  background: linear-gradient(180deg, transparent, rgba(15, 19, 17, 0.85));
+  color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.founder-portrait-name {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.founder-portrait-role {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.founder-body { font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+.founder-body p { margin-bottom: 18px; }
+.founder-body strong { color: var(--ink); font-weight: 600; }
+.founder-lede {
+  font-family: var(--f-serif);
+  font-size: 21px !important;
+  line-height: 1.5 !important;
+  color: var(--ink) !important;
+  font-weight: 400;
+  margin-bottom: 24px !important;
+  letter-spacing: -0.01em;
+}
+.founder-lede strong { font-weight: 600; }
+
+.founder-credentials {
+  margin-top: 32px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+@media (max-width: 540px) { .founder-credentials { grid-template-columns: 1fr; } }
+.cred-item { display: flex; flex-direction: column; gap: 4px; }
+.cred-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.cred-val {
+  font-size: 13.5px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.45;
+}
+.cred-val em { font-style: italic; color: var(--ink-soft); font-weight: 400; }
+
+.founder-readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+  padding-bottom: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.founder-readmore:hover { color: var(--ink); border-color: var(--ink); }
+.founder-readmore span { font-size: 14px; }
+
+/* News feature */
+.news-feature {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (max-width: 940px) { .news-feature { grid-template-columns: 1fr; padding: 28px; gap: 28px; } }
+
+.news-tag {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #cc0000;
+  font-weight: 700;
+  margin-bottom: 18px;
+  background: #ffe5e5;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+.news-headline {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.news-dek {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+.news-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.news-source {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+.news-watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+  padding-bottom: 4px;
+  font-weight: 600;
+}
+.news-watch:hover { color: var(--ink); border-color: var(--ink); }
+
+.news-video-thumb {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  cursor: pointer;
+  background: var(--ink);
+}
+.news-video-thumb svg:first-child { width: 100%; height: 100%; display: block; }
+.news-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+.news-video-thumb:hover .news-play { transform: translate(-50%, -50%) scale(1.1); }
+.news-play svg { width: 100%; height: 100%; }
+
+/* ============ PULL QUOTE ============ */
+.pullquote {
+  padding: 140px var(--gutter);
+  border-bottom: 1px solid var(--line);
+  background: var(--ink);
+  color: var(--bg);
+}
+.pullquote-inner { max-width: 1040px; margin: 0 auto; }
+.pullquote-mark {
+  font-family: var(--f-serif);
+  font-size: 100px;
+  line-height: 0.4;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: inline-block;
+  font-weight: 400;
+  font-style: italic;
+}
+.pullquote-text {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(26px, 3.6vw, 48px);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  color: var(--bg);
+  margin-bottom: 36px;
+}
+.pullquote-text em { font-style: italic; color: var(--gold); font-family: var(--f-serif); font-weight: 400; }
+.pullquote-cite {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+.pullquote-cite span { color: var(--gold); }
+
+/* ============ FIELD VOICES ============ */
+.voices {
+  padding: 120px var(--gutter);
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.voices-inner { max-width: var(--max); margin: 0 auto; }
+.voices-head {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+@media (max-width: 820px) { .voices-head { grid-template-columns: 1fr; gap: 28px; } }
+
+.voices-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+@media (max-width: 1100px) { .voices-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .voices-grid { grid-template-columns: 1fr; } }
+
+.voice-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.25s ease;
+}
+.voice-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 14px 32px rgba(15, 19, 17, 0.08);
+  transform: translateY(-2px);
+}
+.voice-avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.voice-avatar svg { width: 100%; height: 100%; display: block; }
+.voice-quote {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 400;
+  flex: 1;
+}
+.voice-cite {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.voice-name {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.voice-role {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ============ MEDIA KIT ============ */
+.media {
+  padding: 130px var(--gutter);
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.media-inner { max-width: var(--max); margin: 0 auto; }
+.media-head { margin-bottom: 64px; max-width: 720px; }
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 940px) { .media-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .media-grid { grid-template-columns: 1fr; } }
+
+.media-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.media-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--green);
+  box-shadow: 0 16px 36px rgba(15, 19, 17, 0.08);
+}
+.media-card-tag {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.media-card-visual {
+  aspect-ratio: 5 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.media-card-visual svg { width: 100%; height: 100%; display: block; }
+
+/* Book mock cover */
+.media-card-book {
+  background: linear-gradient(135deg, #0a5c44, #1a7d5f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+.media-book-cover {
+  width: 70%;
+  aspect-ratio: 2/3;
+  background: linear-gradient(180deg, #f7f7f5, #eeeeea);
+  border-radius: 2px;
+  box-shadow: 0 8px 20px rgba(15, 19, 17, 0.3);
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.media-book-cover::before {
+  content: '';
+  position: absolute;
+  left: 6px; top: 6px; bottom: 6px;
+  width: 1px;
+  background: var(--gold);
+}
+.media-book-title {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.media-book-author {
+  font-family: var(--f-mono);
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-weight: 700;
+  text-align: right;
+}
+
+.media-card-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-top: 4px;
+}
+.media-card-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  flex: 1;
+}
+.media-card-body em { color: var(--ink); font-style: italic; }
+.media-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 600;
+}
+.media-card:hover .media-card-link span { transform: translateX(3px); }
+.media-card-link span { transition: transform 0.25s; font-size: 13px; }
+
+/* ============ DIAGNOSTIC ============ */
+.diagnostic {
+  padding: 120px var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.diag-inner { max-width: var(--max); margin: 0 auto; }
+.diag-head {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+@media (max-width: 820px) { .diag-head { grid-template-columns: 1fr; } }
+
+.diag-title {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+.diag-title em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.diag-intro {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 440px;
+}
+
+.diag-wrap {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 52px clamp(24px, 4vw, 60px);
+  position: relative;
+}
+.diag-progress { display: flex; gap: 4px; margin-bottom: 40px; }
+.diag-progress span { flex: 1; height: 3px; background: var(--line); border-radius: 2px; transition: background 0.4s; }
+.diag-progress span.active { background: var(--gold); }
+.diag-progress span.done { background: var(--green); }
+.diag-question { min-height: 300px; }
+.diag-qnum {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.diag-qtext {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-bottom: 36px;
+  max-width: 760px;
+}
+.diag-options { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+@media (max-width: 720px) { .diag-options { grid-template-columns: 1fr; } }
+
+.diag-opt {
+  padding: 16px 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  border-radius: 5px;
+  text-align: left;
+  font-size: 13px;
+  font-family: var(--f-sans);
+  color: var(--ink);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  line-height: 1.42;
+  font-weight: 500;
+}
+.diag-opt:hover {
+  background: var(--green);
+  color: var(--bg);
+  border-color: var(--green);
+}
+.diag-opt:hover .diag-opt-val { color: var(--gold-soft); }
+.diag-opt-val {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.diag-result { display: none; text-align: center; }
+.diag-result.show { display: block; }
+.diag-result-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.diag-result-score {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(72px, 9vw, 124px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--green);
+  margin-bottom: 22px;
+}
+.diag-result-score .denom { font-size: 0.35em; color: var(--muted); font-weight: 400; }
+.diag-result-grade {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: clamp(22px, 2.4vw, 30px);
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+.diag-result-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 540px;
+  margin: 0 auto 36px;
+}
+.diag-restart {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-top: 16px;
+  display: inline-block;
+  font-weight: 500;
+}
+.diag-restart:hover { color: var(--green); }
+
+.diag-result-actions {
+  margin-bottom: 36px;
+}
+.diag-share {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  display: inline-block;
+  text-align: center;
+}
+.diag-share-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.diag-share-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font-family: var(--f-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.share-btn:hover {
+  background: var(--green);
+  color: var(--bg);
+  border-color: var(--green);
+}
+.share-btn svg { flex-shrink: 0; }
+.share-btn.copied { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+/* ============ INSIGHTS ============ */
+.insights {
+  padding: 120px var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.insights-inner { max-width: var(--max); margin: 0 auto; }
+.insights-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.insights-title {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(32px, 4.4vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  max-width: 740px;
+}
+.insights-title em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.insights-link {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--green);
+  font-weight: 600;
+}
+.insights-link:hover { color: var(--ink); border-color: var(--ink); }
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 940px) { .insights-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .insights-grid { grid-template-columns: 1fr; } }
+
+.insight-card {
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.insight-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--green);
+  box-shadow: 0 16px 40px rgba(15, 19, 17, 0.06);
+}
+.insight-card.feature { grid-row: span 2; }
+@media (max-width: 940px) { .insight-card.feature { grid-row: auto; } }
+
+.insight-img {
+  aspect-ratio: 16 / 10;
+  background: var(--green);
+  position: relative;
+  overflow: hidden;
+}
+.insight-card.feature .insight-img { aspect-ratio: 4 / 3; }
+.insight-tag {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: rgba(15, 19, 17, 0.85);
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.insight-content {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.insight-meta {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  gap: 14px;
+  font-weight: 500;
+  align-items: center;
+}
+.insight-coming {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.insight-headline {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.insight-card.feature .insight-headline { font-size: 26px; }
+.insight-dek {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.insight-readtime {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-top: auto;
+  padding-top: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ============ HOW ============ */
+.how {
+  padding: 120px var(--gutter);
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.how-inner { max-width: var(--max); margin: 0 auto; }
+.how-head { margin-bottom: 64px; max-width: 800px; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
+
+.step {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 36px 30px 40px;
+  transition: all 0.25s;
+}
+.step:hover { border-color: var(--green); }
+.step-num {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 48px;
+  color: var(--green);
+  margin-bottom: 24px;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+.step-tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.step-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+.step-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ============ CTA ============ */
+.cta {
+  padding: 140px var(--gutter);
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(10, 92, 68, 0.08), transparent 60%),
+    var(--bg);
+  text-align: center;
+}
+.cta-inner { max-width: 900px; margin: 0 auto; }
+.cta-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+}
+.cta-eyebrow::before, .cta-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--green); }
+.cta-headline {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(40px, 5.6vw, 80px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  margin-bottom: 32px;
+}
+.cta-headline em { font-style: italic; color: var(--green); font-family: var(--f-serif); font-weight: 400; }
+.cta-sub {
+  font-size: 17.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 44px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+.cta-paths {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+  text-align: left;
+}
+@media (max-width: 820px) { .cta-paths { grid-template-columns: 1fr; } }
+.cta-path {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 32px 28px 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.25s ease;
+  min-height: 240px;
+}
+.cta-path:hover {
+  border-color: var(--green);
+  background: var(--bg-2);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(10, 92, 68, 0.08);
+}
+.cta-path-num {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--green);
+}
+.cta-path-tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.cta-path-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.cta-path-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-top: auto;
+}
+.cta-path-arrow {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  font-size: 18px;
+  color: var(--muted-2);
+  transition: all 0.25s ease;
+}
+.cta-path:hover .cta-path-arrow { color: var(--green); transform: translate(3px, -3px); }
+
+.cta-path.featured {
+  background: var(--green);
+  border-color: var(--green);
+}
+.cta-path.featured .cta-path-num { color: var(--gold); }
+.cta-path.featured .cta-path-tag { color: var(--gold); }
+.cta-path.featured .cta-path-title { color: var(--bg); }
+.cta-path.featured .cta-path-body { color: rgba(255,255,255,0.85); }
+.cta-path.featured .cta-path-arrow { color: var(--gold); }
+.cta-path.featured:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.cta-footer {
+  margin-top: 40px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+.cta-footer a {
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+  padding-bottom: 1px;
+  font-style: normal;
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+}
+.cta-footer a:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ============ STICKY ============ */
+.sticky-ribbon {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 14px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+}
+.sticky-ribbon.show { transform: translateY(0); }
+.sticky-text {
+  font-family: var(--f-display);
+  font-size: 14.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.sticky-text strong { font-weight: 700; color: var(--gold); }
+.sticky-actions { display: flex; gap: 12px; align-items: center; }
+.sticky-time {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.sticky-btn {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 9px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.sticky-btn:hover { background: var(--bg); }
+.sticky-close {
+  width: 28px; height: 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+}
+.sticky-close:hover { color: var(--bg); border-color: var(--bg); }
+@media (max-width: 640px) { .sticky-text { font-size: 13px; } .sticky-time { display: none; } }
+
+/* ============ FOOTER ============ */
+.footer {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 80px var(--gutter) 36px;
+}
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 56px;
+  margin-bottom: 56px;
+}
+@media (max-width: 820px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .footer-inner { grid-template-columns: 1fr; } }
+.footer-brand-text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.6);
+  margin-top: 18px;
+  max-width: 320px;
+}
+.footer-col h4 {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-col a { font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.2s; }
+.footer-col a:hover { color: var(--bg); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 30px;
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+}
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s ease, transform 0.85s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.06s; }
+.reveal-d2 { transition-delay: 0.14s; }
+.reveal-d3 { transition-delay: 0.22s; }
+.reveal-d4 { transition-delay: 0.30s; }
+/* ============ MOBILE FIXES (consolidated) ============ */
+@media (max-width: 640px) {
+
+  /* Nav — tighter CTA */
+  .nav-cta {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .nav { padding: 14px var(--gutter); }
+  .nav.scrolled { padding: 10px var(--gutter); }
+  .brand { font-size: 17px; gap: 10px; }
+  .brand-mark { width: 26px; height: 26px; }
+  .brand-sub { font-size: 8px; }
+
+  /* Hero — reduce padding */
+  .hero { padding: 110px var(--gutter) 60px; min-height: 85vh; }
+  .hero-title { font-size: 38px; }
+  .hero-sub { font-size: 15px; }
+  .eyebrow { font-size: 10px; margin-bottom: 24px; }
+  .btn { padding: 13px 20px; font-size: 13px; width: 100%; justify-content: center; }
+
+  /* Hero card */
+  .hero-card { padding: 22px 20px; }
+  .hero-byline .founder-name { font-size: 18px !important; }
+  .founder-title { font-size: 11.5px !important; }
+  .founder-quote { font-size: 14px !important; padding-left: 14px; }
+  .founder-meta-num { font-size: 26px !important; }
+  .founder-meta-lbl { font-size: 8px !important; }
+
+  /* Trustbar — wrap tighter */
+  .trustbar { padding: 28px var(--gutter); }
+  .trustbar-inner { flex-direction: column; gap: 12px; }
+  .trustbar-items { gap: 10px 18px; }
+  .trustbar-item { font-size: 11px; }
+
+  /* Stats — CRITICAL: hide inline footnote refs that merge with numbers */
+  .fn-ref { display: none !important; }
+  .stat-num .sup { display: block; font-size: 13px; margin-top: 4px; margin-left: 0; }
+  .stat { padding: 28px 20px; }
+  .stat-num { font-size: 48px; }
+
+  /* Footnotes — single column, tighter */
+  .footnotes-list { grid-template-columns: 1fr; gap: 12px; }
+  .footnotes-list li { font-size: 11.5px; }
+
+  /* Section titles — tighter */
+  .section-title { font-size: 32px; }
+  .section-eyebrow { font-size: 10px; }
+  .section-intro { font-size: 15px; }
+
+  /* Reframe */
+  .reframe-h { font-size: 34px; }
+  .reframe-body { font-size: 15px; }
+  .vocab { grid-template-columns: 1fr; }
+  .vocab-item { padding: 14px 16px; font-size: 13px; }
+
+  /* Pillars */
+  .pillar { padding: 26px 22px 30px; }
+  .pillar-title { font-size: 17px; min-height: auto; }
+  .pillar-body { font-size: 13px; }
+
+  /* Compare table — add scroll hint */
+  .compare-table-wrap { position: relative; }
+  .compare-table-wrap::after {
+    content: '← scroll →';
+    position: absolute;
+    bottom: -24px;
+    right: 0;
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* Timeline — vertical */
+  .tl-headline { font-size: 15px; }
+  .tl-body { font-size: 12px; }
+
+  /* Founder section */
+  .founder { padding: 80px var(--gutter); }
+  .founder-head .section-title { font-size: 30px; }
+  .founder-lede { font-size: 18px !important; }
+  .founder-body { font-size: 14.5px; }
+  .founder-credentials { grid-template-columns: 1fr; gap: 12px; }
+  .news-feature { padding: 22px; }
+  .news-headline { font-size: 20px; }
+
+  /* Voices — tighter cards */
+  .voice-quote { font-size: 14px; }
+  .voice-name { font-size: 13px; }
+
+  /* Media kit */
+  .media { padding: 80px var(--gutter); }
+  .media-card { padding: 20px 18px 22px; }
+  .media-card-title { font-size: 15px; }
+  .media-card-body { font-size: 12px; }
+
+  /* Diagnostic */
+  .diag-title { font-size: 30px; }
+  .diag-qtext { font-size: 20px; }
+  .diag-opt { padding: 14px 12px; font-size: 13px; }
+  .diag-result-score { font-size: 72px; }
+  .diag-result-grade { font-size: 22px; }
+  .diag-share { padding: 18px 20px; }
+  .share-btn { padding: 8px 12px; font-size: 12px; }
+
+  /* Insights */
+  .insights-title { font-size: 28px; }
+  .insight-headline { font-size: 16px !important; }
+  .insight-card.feature .insight-headline { font-size: 20px !important; }
+
+  /* CTA */
+  .cta { padding: 100px var(--gutter); }
+  .cta-headline { font-size: 36px; }
+  .cta-sub { font-size: 15px; }
+  .cta-path { padding: 24px 22px 26px; min-height: auto; }
+  .cta-path-title { font-size: 18px; }
+  .cta-path-body { font-size: 13px; }
+  .cta-footer { font-size: 14px; }
+  .cta-footer a { font-size: 13px; }
+
+  /* CRITICAL: Hide save-your-place prompt on mobile */
+  .save-prompt { display: none !important; }
+
+  /* Section counter — tighter on mobile */
+  .section-counter { padding: 8px 12px; bottom: 68px; right: 12px; }
+  .section-counter-num { font-size: 11px; }
+
+  /* Sticky ribbon — tighter */
+  .sticky-ribbon { padding: 10px var(--gutter); }
+  .sticky-text { font-size: 12px; }
+  .sticky-btn { padding: 8px 14px; font-size: 12px; }
+
+  /* Pullquote */
+  .pullquote { padding: 80px var(--gutter); }
+  .pullquote-text { font-size: 24px; }
+  .pullquote-mark { font-size: 72px; margin-bottom: 16px; }
+
+  /* Callouts */
+  .callout { font-size: 14px; padding: 12px 16px; }
+
+  /* Footer */
+  .footer { padding: 60px var(--gutter) 32px; }
+  .footer-brand-text { font-size: 13px; }
+
+  /* Easter egg toast */
+  .brand-egg-toast { max-width: calc(100vw - 32px); padding: 14px 18px; }
+  .brand-egg-quote { font-size: 15px; }
+
+  /* How it works steps */
+  .step { padding: 28px 22px 32px; }
+  .step-num { font-size: 36px; }
+  .step-title { font-size: 18px; }
+}
+
+/* Small phone (< 380px) extra tightening */
+@media (max-width: 380px) {
+  .hero-title { font-size: 34px; }
+  .stat-num { font-size: 40px; }
+  .cta-headline { font-size: 30px; }
+  .section-title { font-size: 28px; }
+  .diag-title { font-size: 26px; }
+  .pullquote-text { font-size: 22px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="reading-progress"><div class="reading-progress-fill" id="readingFill"></div></div>
+
+<!-- Section counter -->
+<div class="section-counter" id="sectionCounter">
+  <span class="section-counter-num"><span id="scNum">01</span><span class="section-counter-denom">/16</span></span>
+  <span class="section-counter-label" id="scLabel">Hero</span>
+</div>
+
+<!-- Save your place prompt -->
+<div class="save-prompt" id="savePrompt">
+  <div class="save-prompt-head">
+    <span class="save-prompt-tag">Save Your Place</span>
+    <button class="save-prompt-close" id="savePromptClose" aria-label="Close">×</button>
+  </div>
+  <div class="save-prompt-title">Want to finish this later?</div>
+  <div class="save-prompt-sub">We'll email you a bookmark so you can pick up where you left off. No spam — just the link.</div>
+  <form class="save-prompt-form" id="savePromptForm">
+    <input type="email" class="save-prompt-input" id="savePromptEmail" placeholder="you@work.com" required>
+    <button type="submit" class="save-prompt-btn">Send</button>
+  </form>
+  <div class="save-prompt-success">✓ Sent — check your inbox.</div>
+</div>
+
+<!-- Reusable illustration library -->
+<svg width="0" height="0" style="position:absolute;visibility:hidden;" aria-hidden="true">
+  <defs>
+    <!-- Skin tones (intentional diverse palette) -->
+    <linearGradient id="skin-1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c9a8"/><stop offset="1" stop-color="#d4a87f"/></linearGradient>
+    <linearGradient id="skin-2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c89876"/><stop offset="1" stop-color="#a87856"/></linearGradient>
+    <linearGradient id="skin-3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5d3e"/><stop offset="1" stop-color="#6d4528"/></linearGradient>
+    <linearGradient id="skin-4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a3a26"/><stop offset="1" stop-color="#3f2716"/></linearGradient>
+    <linearGradient id="skin-5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8b896"/><stop offset="1" stop-color="#b8956d"/></linearGradient>
+
+    <!-- Hair colors -->
+    <linearGradient id="hair-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1e16"/><stop offset="1" stop-color="#1a120c"/></linearGradient>
+    <linearGradient id="hair-gray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a5651"/><stop offset="1" stop-color="#3d3a36"/></linearGradient>
+    <linearGradient id="hair-warm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d3a1f"/><stop offset="1" stop-color="#3f2814"/></linearGradient>
+    <linearGradient id="hair-blonde" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9a26b"/><stop offset="1" stop-color="#9a7848"/></linearGradient>
+    <linearGradient id="hair-black-curly" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1812"/><stop offset="1" stop-color="#0f0a06"/></linearGradient>
+
+    <!-- Background gradients for portrait cards -->
+    <linearGradient id="bg-warm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0e2c4"/><stop offset="1" stop-color="#e8d3a0"/></linearGradient>
+    <linearGradient id="bg-cool" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4e9df"/><stop offset="1" stop-color="#b5d6c5"/></linearGradient>
+    <linearGradient id="bg-deep" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a7d5f"/><stop offset="1" stop-color="#0a5c44"/></linearGradient>
+    <linearGradient id="bg-neutral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eeeeea"/><stop offset="1" stop-color="#d8d6d0"/></linearGradient>
+    <linearGradient id="bg-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c89645"/><stop offset="1" stop-color="#9c6f2c"/></linearGradient>
+
+    <!-- ============ PORTRAIT: DAVID (FOUNDER) ============ -->
+    <!-- Stylized male, athletic build, salt-and-pepper hair, warm skin, professional -->
+    <symbol id="portrait-david" viewBox="0 0 400 500">
+      <rect width="400" height="500" fill="url(#bg-deep)"/>
+      <!-- Subtle texture lines -->
+      <g opacity="0.08" stroke="#ffffff" stroke-width="0.5" fill="none">
+        <path d="M0 380 Q 100 360 200 370 T 400 350"/>
+        <path d="M0 420 Q 100 400 200 410 T 400 390"/>
+      </g>
+      <!-- Body / shoulders -->
+      <path d="M70 500 Q 70 330 200 320 Q 330 330 330 500 Z" fill="#1f2222"/>
+      <!-- Shirt collar suggestion -->
+      <path d="M155 360 L 200 380 L 245 360 L 250 410 L 150 410 Z" fill="#0a5c44"/>
+      <!-- Neck -->
+      <path d="M178 290 L 178 330 Q 200 340 222 330 L 222 290 Z" fill="url(#skin-5)"/>
+      <!-- Head shape -->
+      <ellipse cx="200" cy="220" rx="68" ry="78" fill="url(#skin-5)"/>
+      <!-- Hair: short, salt-and-pepper -->
+      <path d="M132 200 Q 130 150 200 138 Q 270 150 268 200 Q 268 175 240 165 Q 200 158 160 165 Q 132 175 132 200 Z" fill="url(#hair-gray)"/>
+      <!-- Subtle hair texture -->
+      <path d="M150 165 Q 160 158 175 156 M195 152 Q 210 152 225 158 M240 165 Q 250 172 258 180" stroke="#ffffff" stroke-width="0.8" fill="none" opacity="0.15"/>
+      <!-- Brow -->
+      <path d="M170 208 Q 182 204 192 208 M208 208 Q 218 204 230 208" stroke="#2a1e16" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- Eyes -->
+      <ellipse cx="180" cy="222" rx="3" ry="3.5" fill="#1a120c"/>
+      <ellipse cx="220" cy="222" rx="3" ry="3.5" fill="#1a120c"/>
+      <!-- Nose -->
+      <path d="M198 230 Q 196 250 200 258 Q 204 250 202 230" stroke="#b8956d" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <!-- Mouth - slight warm smile -->
+      <path d="M186 268 Q 200 274 214 268" stroke="#2a1e16" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Subtle smile lines (warmth indicator) -->
+      <path d="M168 252 Q 170 260 174 264 M232 252 Q 230 260 226 264" stroke="#a87856" stroke-width="1" fill="none" opacity="0.4"/>
+    </symbol>
+
+    <!-- ============ PORTRAIT: SCHOOL COUNSELOR (W, 40s, warm) ============ -->
+    <symbol id="portrait-counselor" viewBox="0 0 200 200">
+      <rect width="200" height="200" fill="url(#bg-warm)"/>
+      <!-- Shoulders / blouse -->
+      <path d="M30 200 Q 30 150 100 145 Q 170 150 170 200 Z" fill="#1f4e4a"/>
+      <!-- Neck -->
+      <path d="M88 118 L 88 145 Q 100 152 112 145 L 112 118 Z" fill="url(#skin-1)"/>
+      <!-- Head -->
+      <ellipse cx="100" cy="90" rx="34" ry="38" fill="url(#skin-1)"/>
+      <!-- Hair: shoulder-length wavy, warm brown -->
+      <path d="M64 78 Q 60 50 100 42 Q 140 50 136 78 Q 142 95 138 120 Q 130 130 122 128 Q 124 100 120 88 Q 110 95 100 95 Q 90 95 80 88 Q 76 100 78 128 Q 70 130 62 120 Q 58 95 64 78 Z" fill="url(#hair-warm)"/>
+      <!-- Hair highlights -->
+      <path d="M75 65 Q 82 60 90 62 M115 60 Q 122 58 128 65" stroke="#ffffff" stroke-width="0.6" fill="none" opacity="0.25"/>
+      <!-- Brow -->
+      <path d="M82 84 Q 89 81 95 83 M105 83 Q 111 81 118 84" stroke="#3f2814" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <!-- Eyes - slightly arched, warm -->
+      <ellipse cx="89" cy="93" rx="2.2" ry="2.6" fill="#3f2814"/>
+      <ellipse cx="111" cy="93" rx="2.2" ry="2.6" fill="#3f2814"/>
+      <!-- Nose -->
+      <path d="M99 100 Q 98 112 100 116 Q 102 112 101 100" stroke="#c89876" stroke-width="1" fill="none" opacity="0.5"/>
+      <!-- Mouth - warm smile -->
+      <path d="M91 124 Q 100 130 109 124" stroke="#3f2814" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Earrings hint -->
+      <circle cx="66" cy="100" r="1.5" fill="#c89645"/>
+      <circle cx="134" cy="100" r="1.5" fill="#c89645"/>
+    </symbol>
+
+    <!-- ============ PORTRAIT: VP OF TALENT (M, 50s, executive) ============ -->
+    <symbol id="portrait-executive" viewBox="0 0 200 200">
+      <rect width="200" height="200" fill="url(#bg-cool)"/>
+      <!-- Shoulders / suit -->
+      <path d="M28 200 Q 28 148 100 142 Q 172 148 172 200 Z" fill="#0f1311"/>
+      <!-- Shirt collar -->
+      <path d="M80 158 L 100 168 L 120 158 L 122 178 L 78 178 Z" fill="#ffffff"/>
+      <!-- Tie -->
+      <path d="M96 168 L 100 172 L 104 168 L 106 195 L 94 195 Z" fill="#0a5c44"/>
+      <!-- Neck -->
+      <path d="M88 118 L 88 145 Q 100 152 112 145 L 112 118 Z" fill="url(#skin-3)"/>
+      <!-- Head -->
+      <ellipse cx="100" cy="90" rx="34" ry="38" fill="url(#skin-3)"/>
+      <!-- Hair: very short, receding -->
+      <path d="M70 75 Q 72 58 100 52 Q 128 58 130 75 Q 128 70 120 68 Q 100 64 80 68 Q 72 70 70 75 Z" fill="url(#hair-dark)"/>
+      <!-- Brow -->
+      <path d="M82 86 Q 89 83 95 85 M105 85 Q 111 83 118 86" stroke="#1a120c" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Eyes -->
+      <ellipse cx="89" cy="95" rx="2.2" ry="2.6" fill="#1a120c"/>
+      <ellipse cx="111" cy="95" rx="2.2" ry="2.6" fill="#1a120c"/>
+      <!-- Nose -->
+      <path d="M99 102 Q 98 114 100 118 Q 102 114 101 102" stroke="#6d4528" stroke-width="1" fill="none" opacity="0.5"/>
+      <!-- Mouth - composed -->
+      <path d="M91 126 Q 100 130 109 126" stroke="#1a120c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Subtle beard suggestion (low coverage) -->
+      <path d="M85 122 Q 100 130 115 122 Q 112 130 100 132 Q 88 130 85 122 Z" fill="#1a120c" opacity="0.18"/>
+    </symbol>
+
+    <!-- ============ PORTRAIT: STUDENT (NB, late teens) ============ -->
+    <symbol id="portrait-student" viewBox="0 0 200 200">
+      <rect width="200" height="200" fill="url(#bg-gold)"/>
+      <!-- Shoulders / hoodie -->
+      <path d="M28 200 Q 28 148 100 142 Q 172 148 172 200 Z" fill="#1f2222"/>
+      <!-- Hoodie strings -->
+      <line x1="92" y1="148" x2="92" y2="180" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+      <line x1="108" y1="148" x2="108" y2="180" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+      <!-- Neck -->
+      <path d="M88 118 L 88 145 Q 100 152 112 145 L 112 118 Z" fill="url(#skin-2)"/>
+      <!-- Head -->
+      <ellipse cx="100" cy="90" rx="34" ry="38" fill="url(#skin-2)"/>
+      <!-- Hair: curly, voluminous, dark -->
+      <g fill="url(#hair-black-curly)">
+        <circle cx="72" cy="68" r="10"/>
+        <circle cx="85" cy="58" r="11"/>
+        <circle cx="100" cy="54" r="12"/>
+        <circle cx="115" cy="58" r="11"/>
+        <circle cx="128" cy="68" r="10"/>
+        <circle cx="68" cy="80" r="8"/>
+        <circle cx="132" cy="80" r="8"/>
+      </g>
+      <!-- Brow -->
+      <path d="M82 86 Q 89 83 95 85 M105 85 Q 111 83 118 86" stroke="#0f0a06" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <!-- Eyes - youthful, bright -->
+      <ellipse cx="89" cy="95" rx="2.4" ry="2.8" fill="#0f0a06"/>
+      <ellipse cx="111" cy="95" rx="2.4" ry="2.8" fill="#0f0a06"/>
+      <!-- Eye highlights -->
+      <circle cx="90" cy="94" r="0.8" fill="#ffffff"/>
+      <circle cx="112" cy="94" r="0.8" fill="#ffffff"/>
+      <!-- Nose -->
+      <path d="M99 102 Q 98 114 100 118 Q 102 114 101 102" stroke="#a87856" stroke-width="1" fill="none" opacity="0.5"/>
+      <!-- Mouth - subtle, neutral-positive -->
+      <path d="M93 125 Q 100 128 107 125" stroke="#0f0a06" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- ============ PORTRAIT: TEACHER / PRINCIPAL (W, 50s, professional) ============ -->
+    <symbol id="portrait-principal" viewBox="0 0 200 200">
+      <rect width="200" height="200" fill="url(#bg-neutral)"/>
+      <!-- Shoulders / blazer -->
+      <path d="M28 200 Q 28 148 100 142 Q 172 148 172 200 Z" fill="#b85c3a"/>
+      <!-- Blouse -->
+      <path d="M85 158 L 100 168 L 115 158 L 117 185 L 83 185 Z" fill="#ffffff"/>
+      <!-- Necklace hint -->
+      <path d="M88 168 Q 100 174 112 168" stroke="#c89645" stroke-width="1.2" fill="none"/>
+      <!-- Neck -->
+      <path d="M88 118 L 88 145 Q 100 152 112 145 L 112 118 Z" fill="url(#skin-1)"/>
+      <!-- Head -->
+      <ellipse cx="100" cy="90" rx="34" ry="38" fill="url(#skin-1)"/>
+      <!-- Hair: chin-length bob, gray-streaked -->
+      <path d="M64 80 Q 60 50 100 44 Q 140 50 136 80 Q 138 110 130 122 Q 128 118 128 95 Q 122 90 100 92 Q 78 90 72 95 Q 72 118 70 122 Q 62 110 64 80 Z" fill="url(#hair-gray)"/>
+      <!-- Hair streak detail -->
+      <path d="M82 60 Q 85 70 88 80" stroke="#ffffff" stroke-width="0.8" fill="none" opacity="0.4"/>
+      <!-- Glasses -->
+      <g stroke="#0f1311" stroke-width="1.5" fill="none">
+        <circle cx="89" cy="93" r="9"/>
+        <circle cx="111" cy="93" r="9"/>
+        <line x1="98" y1="93" x2="102" y2="93"/>
+      </g>
+      <!-- Eyes (behind glasses) -->
+      <ellipse cx="89" cy="93" rx="2" ry="2.4" fill="#3f2814"/>
+      <ellipse cx="111" cy="93" rx="2" ry="2.4" fill="#3f2814"/>
+      <!-- Brow -->
+      <path d="M82 81 Q 89 78 95 80 M105 80 Q 111 78 118 81" stroke="#5a5651" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Nose -->
+      <path d="M99 104 Q 98 114 100 118 Q 102 114 101 104" stroke="#c89876" stroke-width="1" fill="none" opacity="0.5"/>
+      <!-- Mouth - measured smile -->
+      <path d="M92 125 Q 100 129 108 125" stroke="#3f2814" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<nav class="nav" id="nav">
+  <a href="#" class="brand" id="brandEgg" title="">
+    <span class="brand-mark">
+      <svg viewBox="0 0 32 32" fill="none">
+        <circle cx="11" cy="11" r="5" stroke="#0f1311" stroke-width="1.6"/>
+        <circle cx="21" cy="21" r="5" stroke="#0a5c44" stroke-width="1.6"/>
+        <line x1="14.5" y1="14.5" x2="17.5" y2="17.5" stroke="#0f1311" stroke-width="1.6"/>
+      </svg>
+    </span>
+    <span>SHs <span class="brand-sub">Social Health Systems</span></span>
+  </a>
+
+  <!-- Easter egg toast -->
+  <div class="brand-egg-toast" id="brandEggToast">
+    <span class="brand-egg-quote">"Connection is the only currency that doesn't depreciate."</span>
+    <span class="brand-egg-cite">— David Kozlowski</span>
+  </div>
+  <div class="nav-links">
+    <a href="#vision">Framework</a>
+    <a href="#compare">How SHs Differs</a>
+    <a href="#founder">Founder</a>
+    <a href="#voices">Voices</a>
+    <a href="#diagnostic">Diagnostic</a>
+    <a href="#more-from-david">Media</a>
+  </div>
+  <a href="#diagnostic" class="nav-cta">Get Your Score</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Social Health Systems / In development since 2011</div>
+      <h1 class="hero-title">
+        <span class="word" style="animation-delay:.3s">We</span>
+        <span class="word" style="animation-delay:.35s">are</span>
+        <span class="word" style="animation-delay:.4s">living</span>
+        <span class="word" style="animation-delay:.45s">through</span>
+        <span class="word" style="animation-delay:.5s">a</span><br>
+        <em><span class="word" style="animation-delay:.62s">Social</span> <span class="word" style="animation-delay:.74s">Connection</span> <span class="word" style="animation-delay:.86s">Collapse.</span></em>
+      </h1>
+      <p class="hero-sub">
+        Anxiety. Burnout. Loneliness. Distrust. <strong>What you're feeling isn't a mental health problem. It's a Social Health problem with mental health side effects.</strong> Connection is not a soft skill — it's measurable infrastructure. Social Health Systems has been building it for fifteen years.
+      </p>
+      <div class="hero-actions">
+        <a href="#diagnostic" class="btn btn-primary">Get Your Social Health Score<span class="btn-arrow">→</span></a>
+        <a href="#story" class="btn btn-ghost">See the Field Evidence</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-tag">FROM THE FOUNDER</div>
+                <div class="hero-byline">
+          <div class="founder-portrait-sm" data-photo="david-headshot">
+          <img src="data:image/jpeg;base64,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" alt="David Kozlowski, Founder of Social Health Systems" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;border-radius:50%;">
+        </div>
+          <div class="hero-byline-text">
+            <div class="founder-name">David Kozlowski</div>
+        <div class="founder-title">Founder, Social Health Systems<br>Licensed Marriage &amp; Family Therapist</div>
+          </div>
+        </div>
+        <blockquote class="founder-quote">
+          "I cut my teeth as a crisis worker — physically stopping people from taking their own lives. I learned one foundational truth: <em>the best suicide prevention is connection.</em>"
+        </blockquote>
+        <div class="founder-meta">
+          <div><span class="founder-meta-num">26</span><span class="founder-meta-lbl">years in mental health</span></div>
+          <div><span class="founder-meta-num">15</span><span class="founder-meta-lbl">years building the framework</span></div>
+        </div>
+        <a href="#story" class="hero-card-link">Read the origin story <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trustbar">
+  <div class="trustbar-inner">
+    <span class="trustbar-label">Featured On</span>
+    <div class="trustbar-items">
+      <span class="trustbar-item">
+        <svg class="trustbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 2v4M16 2v4"/></svg>
+        KUTV Channel 2 News
+      </span>
+      <span class="trustbar-item">
+        <svg class="trustbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        TEDx Talk · 130K+ views
+      </span>
+      <span class="trustbar-item">
+        <svg class="trustbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+        NBC-KSL Studio 5
+      </span>
+      <span class="trustbar-item">
+        <svg class="trustbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="4"/></svg>
+        ESPN 700 Radio
+      </span>
+      <span class="trustbar-item">
+        <svg class="trustbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 6a6 6 0 0 0-6 6M12 6a6 6 0 0 1 6 6M12 18a6 6 0 0 0 6-6M12 18a6 6 0 0 1-6-6"/></svg>
+        OG Therapy Podcast · Millions of downloads
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="route" id="research">
+  <div class="route-inner">
+    <div class="route-head">
+      <h2 class="route-h">Where do you want to <em>start</em>?</h2>
+      <span class="route-sub">Four routes / 60 seconds each</span>
+    </div>
+    <div class="route-grid">
+      <a href="schools.html" class="route-card">
+        <div class="route-num">01 / FOR EDUCATORS</div>
+        <h3 class="route-title">Schools &amp; Districts</h3>
+        <div class="route-body">From the Herriman HS field model that reduced reported suicidal ideation from 155 to 5.</div>
+        <span class="route-arrow">↗</span>
+      </a>
+      <a href="enterprise.html" class="route-card">
+        <div class="route-num">02 / FOR CHROs</div>
+        <h3 class="route-title">Enterprise &amp; HR</h3>
+        <div class="route-body">A relational change management system for retention, leadership, and Connection Currency at scale.</div>
+        <span class="route-arrow">↗</span>
+      </a>
+      <a href="healthcare.html" class="route-card">
+        <div class="route-num">03 / FOR CLINICIANS</div>
+        <h3 class="route-title">Healthcare</h3>
+        <div class="route-body">The missing pillar alongside physical and mental health. Trauma-informed relational protocols.</div>
+        <span class="route-arrow">↗</span>
+      </a>
+      <a href="community.html" class="route-card">
+        <div class="route-num">04 / FOR LEADERS</div>
+        <h3 class="route-title">Communities &amp; Families</h3>
+        <div class="route-body">Rebuilding face-to-face Social Cardio. Programs for parents, youth, and community organizations.</div>
+        <span class="route-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="statband">
+  <div class="statband-inner">
+    <div class="statband-label reveal">The Data</div>
+    <h2 class="statband-headline reveal reveal-d1">
+      Disconnection is no longer anecdotal. <em>It is measurable, expensive, and accelerating.</em>
+    </h2>
+    <div class="stats">
+      <div class="stat reveal reveal-d1">
+        <div class="stat-num">15<span class="sup">cig/day</span><sup class="fn-ref"><a href="#fn1">1</a></sup></div>
+        <div class="stat-label">Physical health impact of social isolation, equivalent to smoking 15 cigarettes a day.</div>
+        <div class="stat-src">U.S. Surgeon General Advisory, 2023</div>
+      </div>
+      <div class="stat reveal reveal-d2">
+        <div class="stat-num">$360<span class="sup">B</span><sup class="fn-ref"><a href="#fn2">2</a></sup></div>
+        <div class="stat-label">Annual U.S. productivity loss from poor manager–employee relationships.</div>
+        <div class="stat-src">Gallup State of the Workplace, 2024</div>
+      </div>
+      <div class="stat reveal reveal-d3">
+        <div class="stat-num">91<span class="sup">%</span><sup class="fn-ref"><a href="#fn3">3</a></sup></div>
+        <div class="stat-label">Of teens reporting suicidal ideation cited relationship breakdown as the primary cause.</div>
+        <div class="stat-src">Herriman HS Field Study, 2017–2018</div>
+      </div>
+      <div class="stat reveal reveal-d4">
+        <div class="stat-num">155 <span style="color:var(--muted);">→</span> 5<sup class="fn-ref"><a href="#fn4">4</a></sup></div>
+        <div class="stat-label">Year-over-year drop in reported suicidal ideation at Herriman HS after Level Up curriculum was introduced.</div>
+        <div class="stat-src">SHs Field Outcomes, 2018–2019</div>
+      </div>
+    </div>
+
+    <div class="footnotes reveal" id="footnotes">
+      <div class="footnotes-label">Sources &amp; Methodology</div>
+      <ol class="footnotes-list">
+        <li id="fn1"><span class="fn-num">1</span> U.S. Department of Health &amp; Human Services. (2023). <em>Our Epidemic of Loneliness and Isolation: The U.S. Surgeon General's Advisory on the Healing Effects of Social Connection and Community.</em> Mortality risk equivalent to smoking up to 15 cigarettes/day. <a href="https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf" target="_blank" rel="noopener">View advisory ↗</a></li>
+        <li id="fn2"><span class="fn-num">2</span> Gallup. (2024). <em>State of the Global Workplace Report.</em> Productivity loss tied to disengagement and poor manager–employee relationships, U.S. estimate. <a href="https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx" target="_blank" rel="noopener">View report ↗</a></li>
+        <li id="fn3"><span class="fn-num">3</span> Kozlowski, D. (2018). <em>Herriman High School Field Study, 2017–2018.</em> Self-reported survey data, n=155 students reporting suicidal ideation; relationship breakdown identified as primary contributing factor in 91% of cases. Full methodology available on request.</li>
+        <li id="fn4"><span class="fn-num">4</span> Kozlowski, D. (2019). <em>SHs Field Outcomes Report, Herriman High School.</em> Year-over-year comparison following 2018–2019 implementation of Level Up curriculum. Reported suicidal ideation among surveyed students dropped from 155 (pre-intervention) to 5 (post-intervention). 30% reduction in at-risk behaviors within six months. Independently corroborated by school administration and featured in KUTV Channel 2 News coverage.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="reframe" id="reframe">
+  <div class="reframe-inner">
+    <div>
+      <div class="section-eyebrow reveal">The Reframe</div>
+      <h2 class="reframe-h reveal reveal-d1">
+        This isn't just a <span class="crossed">mental health</span><br>
+        crisis. It's a <span class="replaced">social health</span> crisis.
+      </h2>
+      <p class="reframe-body reveal reveal-d2">
+        Mental health is the most visible symptom. But beneath it lies something deeper — and largely unaddressed: <strong>the quality, frequency, and infrastructure of human connection itself.</strong> Social Health is the missing pillar of well-being. It is the soil. Without it, everything else fails to grow.
+      </p>
+      <div class="vocab reveal reveal-d3">
+        <button class="vocab-item" data-detail="The collapse of relational infrastructure across schools, workplaces, families, and online spaces. The condition beneath today's mental health crisis."><span class="vocab-item-head">Connection Collapse <span class="vocab-plus">+</span></span><span class="vocab-detail"></span></button>
+        <button class="vocab-item" data-detail="The relational value earned through trust, reliability, and consistent presence. The only currency that doesn't depreciate in a recession."><span class="vocab-item-head">Connection Currency™ <span class="vocab-plus">+</span></span><span class="vocab-detail"></span></button>
+        <button class="vocab-item" data-detail="Daily face-to-face interaction practiced as fitness. Just as the heart weakens without cardio, social bonds weaken without practice."><span class="vocab-item-head">Social Cardio <span class="vocab-plus">+</span></span><span class="vocab-detail"></span></button>
+        <button class="vocab-item" data-detail="A communication principle: lead with grounding statements, not interrogations. People connect when they feel understood before they feel evaluated."><span class="vocab-item-head">Statements Before Questions <span class="vocab-plus">+</span></span><span class="vocab-detail"></span></button>
+        <button class="vocab-item" data-detail="See people as humans to regard before problems to solve. Trust and empathy come first — before correction, content, or compliance."><span class="vocab-item-head">Connection Before Concern <span class="vocab-plus">+</span></span><span class="vocab-detail"></span></button>
+        <button class="vocab-item" data-detail="A person's earned belief in their ability to build and navigate relationships. The 'team chemistry' every leader wants but few know how to install."><span class="vocab-item-head">Connection Confidence™ <span class="vocab-plus">+</span></span><span class="vocab-detail"></span></button>
+      </div>
+    </div>
+    <div class="reframe-visual reveal reveal-d2">
+      <svg viewBox="0 0 500 500">
+        <defs><radialGradient id="core3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#b3853a"/><stop offset="60%" stop-color="#b3853a" stop-opacity="0.35"/><stop offset="100%" stop-color="#b3853a" stop-opacity="0"/></radialGradient></defs>
+        <g stroke="rgba(15,19,17,0.12)" stroke-width="0.8" fill="none">
+          <line x1="250" y1="250" x2="100" y2="120"/><line x1="250" y1="250" x2="400" y2="120"/><line x1="250" y1="250" x2="430" y2="280"/><line x1="250" y1="250" x2="380" y2="420"/><line x1="250" y1="250" x2="120" y2="400"/><line x1="250" y1="250" x2="80" y2="240"/><line x1="250" y1="250" x2="240" y2="70"/><line x1="250" y1="250" x2="250" y2="430"/>
+        </g>
+        <g stroke="rgba(10,92,68,0.55)" stroke-width="1" fill="none">
+          <line x1="100" y1="120" x2="240" y2="70"/><line x1="240" y1="70" x2="400" y2="120"/><line x1="400" y1="120" x2="430" y2="280"/><line x1="430" y1="280" x2="380" y2="420"/><line x1="380" y1="420" x2="250" y2="430"/><line x1="250" y1="430" x2="120" y2="400"/><line x1="120" y1="400" x2="80" y2="240"/><line x1="80" y1="240" x2="100" y2="120"/>
+        </g>
+        <circle cx="250" cy="250" r="44" fill="url(#core3)"><animate attributeName="r" values="44;58;44" dur="4s" repeatCount="indefinite"/></circle>
+        <circle cx="250" cy="250" r="14" fill="#0a5c44"/>
+        <circle cx="250" cy="250" r="6" fill="#ffffff"/>
+        <g fill="#0a5c44"><circle cx="100" cy="120" r="9"/><circle cx="240" cy="70" r="8"/><circle cx="400" cy="120" r="9"/><circle cx="430" cy="280" r="10"/><circle cx="380" cy="420" r="8"/><circle cx="250" cy="430" r="9"/><circle cx="120" cy="400" r="8"/><circle cx="80" cy="240" r="10"/></g>
+        <g font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="1.5" fill="rgba(15,19,17,0.55)" font-weight="500">
+          <text x="100" y="105" text-anchor="middle">SCHOOLS</text><text x="240" y="55" text-anchor="middle">TEAMS</text><text x="400" y="105" text-anchor="middle">FAMILIES</text><text x="455" y="284" text-anchor="start">LEADERS</text><text x="380" y="445" text-anchor="middle">YOUTH</text><text x="250" y="455" text-anchor="middle">CULTURE</text><text x="120" y="425" text-anchor="middle">HEALTH</text><text x="50" y="244" text-anchor="end">COMMUNITY</text>
+        </g>
+        <text x="250" y="288" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="2" fill="#ffffff" font-weight="600">SHs</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="pillars" id="vision">
+  <div class="pillars-inner">
+    <div class="pillars-head">
+      <div class="reveal">
+        <div class="section-eyebrow">The Framework</div>
+        <h2 class="section-title">Connection is <em>infrastructure.</em></h2>
+      </div>
+      <div class="reveal reveal-d2">
+        <p class="section-intro">Four foundational practices that turn culture from compliance into <strong>connection</strong>. Not abstract values — operational layers of every healthy organization.</p>
+      </div>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar reveal reveal-d1">
+        <div class="pillar-icon-wrap"><svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/></svg></div>
+        <div class="pillar-num">01 / Foundation</div>
+        <div class="pillar-title">Connection Before Concern</div>
+        <div class="pillar-body">See people as humans to regard before problems to solve. Trust and empathy come first — before correction, content, or compliance.</div>
+      </div>
+      <div class="pillar reveal reveal-d2">
+        <div class="pillar-icon-wrap"><svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="7" cy="16" r="2.5"/><circle cx="17" cy="16" r="2.5"/><line x1="7" y1="10.5" x2="7" y2="13.5"/><line x1="17" y1="10.5" x2="17" y2="13.5"/><line x1="9.5" y1="8" x2="14.5" y2="8"/><line x1="9.5" y1="16" x2="14.5" y2="16"/></svg></div>
+        <div class="pillar-num">02 / Practice</div>
+        <div class="pillar-title">Connection Currency™ Tools</div>
+        <div class="pillar-body">Eye contact. Names. Gentle tone. Cultural rituals. Daily micro-behaviors that make big safety deposits into team, classroom, and family culture.</div>
+      </div>
+      <div class="pillar reveal reveal-d3">
+        <div class="pillar-icon-wrap"><svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h11M4 17h16"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg></div>
+        <div class="pillar-num">03 / Communication</div>
+        <div class="pillar-title">Statements Before Questions</div>
+        <div class="pillar-body">In moments of conflict, start with grounding statements — not interrogations. People connect when they feel understood before evaluated.</div>
+      </div>
+      <div class="pillar reveal reveal-d4">
+        <div class="pillar-icon-wrap"><svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 7-3 4.5 4.5 0 0 1 7 3c0 5.5-7 10-7 10z"/></svg></div>
+        <div class="pillar-num">04 / Response</div>
+        <div class="pillar-title">Relational Response to Mental Health™</div>
+        <div class="pillar-body">Behavior is communication. A five-stage protocol replacing reactive crisis management with present, emotionally aware response.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="callout-band reveal">
+  <div class="callout">
+    <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg>
+    <div><strong>Did you know?</strong> The opposite of connection isn't disagreement — it's indifference. Most teams confuse harmony with health.</div>
+  </div>
+</section>
+
+<section class="compare" id="compare">
+  <div class="compare-inner">
+    <div class="compare-head">
+      <div class="reveal">
+        <div class="section-eyebrow">How SHs Differs</div>
+        <h2 class="section-title">Not another <em>training program.</em></h2>
+      </div>
+      <div class="reveal reveal-d2">
+        <p class="section-intro">SHs occupies a category that didn't exist five years ago. Here's where it sits relative to the systems already on your desk.</p>
+      </div>
+    </div>
+
+    <div class="compare-table-wrap reveal reveal-d1">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>DEI Programs</th>
+            <th>EAP / Wellness</th>
+            <th>Leadership Training</th>
+            <th class="ours">Social Health Systems</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Primary unit</th>
+            <td>Identity categories</td>
+            <td>Individual symptom</td>
+            <td>Mindset / skill</td>
+            <td class="ours">The relationship itself</td>
+          </tr>
+          <tr>
+            <th>Delivery model</th>
+            <td>Episodic training</td>
+            <td>Opt-in services</td>
+            <td>Workshop / cohort</td>
+            <td class="ours">Embedded operating system</td>
+          </tr>
+          <tr>
+            <th>What's measured</th>
+            <td>Representation</td>
+            <td>Utilization rate</td>
+            <td>Course completion</td>
+            <td class="ours">Connection Currency &amp; behavior</td>
+          </tr>
+          <tr>
+            <th>Time horizon</th>
+            <td>Annual cycle</td>
+            <td>Crisis response</td>
+            <td>Semester / quarter</td>
+            <td class="ours">Continuous reinforcement</td>
+          </tr>
+          <tr>
+            <th>Accreditation</th>
+            <td>Optional / fragmented</td>
+            <td>External provider</td>
+            <td>Certificate of completion</td>
+            <td class="ours">SHa peer-reviewed tiers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">SHs does not replace these programs. It supplies the relational infrastructure they all depend on but none of them deliver.</p>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-inner">
+    <div class="story-head">
+      <div class="reveal">
+        <div class="section-eyebrow">Field Studies</div>
+        <h2 class="story-title">From <em>seven suicides</em> to a national framework.</h2>
+      </div>
+      <div class="reveal reveal-d2">
+        <p class="story-sub">Fifteen years of clinical and field practice — distilled into a framework now operationalized across organizations, communities, and entire systems.</p>
+      </div>
+    </div>
+    <div class="timeline-track">
+      <div class="tl-step reveal reveal-d1"><div class="tl-dot"></div><div class="tl-year">2011</div><h3 class="tl-headline">The work begins</h3><p class="tl-body">Two decades of clinical and field practice in mental health and crisis intervention crystallize into a new question: what if the missing pillar isn't mental — it's social?</p></div>
+      <div class="tl-step reveal reveal-d1"><div class="tl-dot"></div><div class="tl-year">2017</div><h3 class="tl-headline">The crisis</h3><p class="tl-body">Herriman HS loses seven students to suicide in a single year. Existing mental health frameworks fail to explain the pattern.</p></div>
+      <div class="tl-step reveal reveal-d2"><div class="tl-dot"></div><div class="tl-year">2018</div><h3 class="tl-headline">The diagnosis</h3><p class="tl-body">Field research finds 91% of suicidal ideation traces to relationship breakdown — not clinical illness. A new category emerges: Social Health.</p></div>
+      <div class="tl-step reveal reveal-d3"><div class="tl-dot"></div><div class="tl-year">2020</div><h3 class="tl-headline">The curriculum</h3><p class="tl-body">Level Up launches at Herriman. Within six months: 30% drop in at-risk behavior. Within a year: ideation reports drop from 155 to 5.</p></div>
+      <div class="tl-step reveal reveal-d4"><div class="tl-dot"></div><div class="tl-year">2024</div><h3 class="tl-headline">The framework</h3><p class="tl-body">SHs formalizes into a Change Management System with five operational pillars and a tiered accreditation model.</p></div>
+      <div class="tl-step now reveal reveal-d4"><div class="tl-dot"></div><div class="tl-year">2026</div><h3 class="tl-headline">The movement</h3><p class="tl-body">Accreditation launches for schools, enterprises, and healthcare. Social Health Intelligence integrated into existing systems at scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="founder" id="founder">
+  <div class="founder-inner">
+    <div class="founder-head reveal">
+      <div class="section-eyebrow">Meet the Founder</div>
+      <h2 class="section-title">The framework didn't come from a whiteboard. <em>It came from a life.</em></h2>
+    </div>
+
+    <div class="founder-grid">
+      <div class="founder-portrait-lg reveal reveal-d1" data-photo="david-large">
+        <img src="data:image/jpeg;base64,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" alt="David Kozlowski — Founder, LMFT, 26 years in mental health" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+        <div class="founder-portrait-caption">
+          <span class="founder-portrait-name">David Kozlowski</span>
+          <span class="founder-portrait-role">Founder · LMFT</span>
+        </div>
+      </div>
+
+      <div class="founder-body reveal reveal-d2">
+        <p class="founder-lede"><strong>David Kozlowski</strong> didn't build Social Health Systems from theory. He built it from the inside of a depression that nearly killed him.</p>
+
+        <p>Raised in Carlsbad, California by his Samoan/Hawaiian grandmother — who fought for custody after his biological mother's struggles with mental health and addiction — David earned a football scholarship to the University of Utah. A series of concussions left him mentally and emotionally unstable, and in 1995 he attempted suicide.</p>
+
+        <p>What saved him was therapy. What followed was a 26-year career proving that <strong>the best suicide prevention is connection.</strong></p>
+
+        <p>David is a Licensed Marriage and Family Therapist, the host of the OG Therapy podcast (millions of downloads), a TEDx speaker, and the architect of the first Social Health curriculum — piloted at Herriman High School in 2020 after the community lost seven youth to suicide in a single year.</p>
+
+        <p>The Social Health framework is the codification of that work.</p>
+
+        <div class="founder-credentials">
+          <div class="cred-item">
+            <span class="cred-label">Licensure</span>
+            <span class="cred-val">LMFT, California &amp; Utah</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-label">Education</span>
+            <span class="cred-val">M.S. Counseling Psychology, National University</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-label">Experience</span>
+            <span class="cred-val">26 years in mental health &amp; crisis intervention</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-label">Author</span>
+            <span class="cred-val"><em>Youth of the Nation</em> &nbsp;·&nbsp; <em>Corporations of the Nation</em> (forthcoming)</span>
+          </div>
+        </div>
+
+        <a href="#more-from-david" class="founder-readmore">More from David <span>↓</span></a>
+      </div>
+    </div>
+
+    <div class="news-feature reveal reveal-d1">
+      <div class="news-feature-left">
+        <div class="news-tag">News Coverage</div>
+        <h3 class="news-headline">"How one Utah school turned around its suicide crisis"</h3>
+        <p class="news-dek">KUTV Channel 2 News covered Herriman High School's transformation following the implementation of David's Social Health curriculum. The story documented the year-over-year drop in reported suicidal ideation — from 155 students to 5 — and what made the intervention different from traditional mental health programming.</p>
+        <div class="news-meta">
+          <span class="news-source">KUTV Channel 2 · Salt Lake City</span>
+          <a href="https://kutv.com/news/local/gallery/former-ute-football-player-teams-up-with-teens-for-suicide-prevention" target="_blank" rel="noopener" class="news-watch">Watch the story <span>→</span></a>
+        </div>
+      </div>
+      <div class="news-feature-right">
+        <div class="news-video-thumb">
+          <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="newsGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1a7d5f"/>
+                <stop offset="1" stop-color="#0a5c44"/>
+              </linearGradient>
+            </defs>
+            <rect width="600" height="380" fill="url(#newsGrad)"/>
+            <g opacity="0.18" stroke="#ffffff" stroke-width="0.8" fill="none">
+              <path d="M0 280 Q 150 240 300 260 T 600 220"/>
+              <path d="M0 310 Q 150 280 300 290 T 600 250"/>
+              <path d="M0 340 Q 150 320 300 320 T 600 290"/>
+            </g>
+            <rect x="40" y="40" width="100" height="32" rx="2" fill="#cc0000"/>
+            <text x="56" y="62" font-family="Inter Tight" font-weight="700" font-size="18" fill="#ffffff">KUTV 2</text>
+            <text x="40" y="100" font-family="JetBrains Mono" font-size="11" letter-spacing="2" fill="#ffffff" font-weight="600">NEWS · HERRIMAN HIGH</text>
+          </svg>
+          <button class="news-play" aria-label="Play KUTV story">
+            <svg viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="30" fill="rgba(15,19,17,0.85)"/>
+              <path d="M24 20 L 42 30 L 24 40 Z" fill="#b3853a"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pullquote">
+  <div class="pullquote-inner">
+    <span class="pullquote-mark reveal">"</span>
+    <p class="pullquote-text reveal reveal-d1">
+      Diversity and inclusion <em>without connection</em> is fragile.<br>
+      The future of culture isn't compliance — it's <em>relational infrastructure.</em>
+    </p>
+    <div class="pullquote-cite reveal reveal-d2">David Kozlowski &nbsp;·&nbsp; <span>Founder, SHs</span></div>
+  </div>
+</section>
+
+<section class="voices" id="voices">
+  <div class="voices-inner">
+    <div class="voices-head">
+      <div class="reveal">
+        <div class="section-eyebrow">Field Voices</div>
+        <h2 class="section-title">What it sounds like <em>on the ground.</em></h2>
+      </div>
+      <div class="reveal reveal-d2">
+        <p class="section-intro">From educators, counselors, students, and leaders inside organizations putting Social Health into practice.</p>
+      </div>
+    </div>
+
+    <div class="voices-grid">
+      <figure class="voice-card reveal reveal-d1">
+        <div class="voice-avatar" data-photo="voice-counselor">
+          <svg viewBox="0 0 200 200"><use href="#portrait-counselor"/></svg>
+        </div>
+        <blockquote class="voice-quote">"We weren't losing kids because we lacked counselors. We were losing them because no adult in the building knew them by name. SHs gave us the language for what was missing."</blockquote>
+        <figcaption class="voice-cite">
+          <span class="voice-name">School Counselor</span>
+          <span class="voice-role">Herriman High School Pilot</span>
+        </figcaption>
+      </figure>
+
+      <figure class="voice-card reveal reveal-d2">
+        <div class="voice-avatar" data-photo="voice-vp">
+          <svg viewBox="0 0 200 200"><use href="#portrait-executive"/></svg>
+        </div>
+        <blockquote class="voice-quote">"I've sat through every leadership program on the market. This is the first one that actually changed how my managers talk to their people on a Tuesday afternoon."</blockquote>
+        <figcaption class="voice-cite">
+          <span class="voice-name">VP of Talent</span>
+          <span class="voice-role">Enterprise pilot partner</span>
+        </figcaption>
+      </figure>
+
+      <figure class="voice-card reveal reveal-d3">
+        <div class="voice-avatar" data-photo="voice-student">
+          <svg viewBox="0 0 200 200"><use href="#portrait-student"/></svg>
+        </div>
+        <blockquote class="voice-quote">"I used to think I was the problem. Level Up taught me that I wasn't broken — I was disconnected. There's a difference, and it changed my life."</blockquote>
+        <figcaption class="voice-cite">
+          <span class="voice-name">Student</span>
+          <span class="voice-role">Level Up graduate, age 17</span>
+        </figcaption>
+      </figure>
+
+      <figure class="voice-card reveal reveal-d4">
+        <div class="voice-avatar" data-photo="voice-principal">
+          <svg viewBox="0 0 200 200"><use href="#portrait-principal"/></svg>
+        </div>
+        <blockquote class="voice-quote">"After we lost seven kids in one year, we knew the old playbook had failed. David didn't bring us a program. He brought us a different question — and that's what saved lives."</blockquote>
+        <figcaption class="voice-cite">
+          <span class="voice-name">School Administrator</span>
+          <span class="voice-role">Pilot site, 2019–2020</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="media" id="more-from-david">
+  <div class="media-inner">
+    <div class="media-head reveal">
+      <div class="section-eyebrow">More From David</div>
+      <h2 class="section-title">Fifteen years of work. <em>One bookshelf.</em></h2>
+      <p class="section-intro" style="max-width: 620px; margin-top: 20px;">A book, a TEDx talk, millions of podcast downloads, and a press archive — all building the same case: Social Health is the missing pillar.</p>
+    </div>
+
+    <div class="media-grid">
+      <a href="https://a.co/d/08WzEr9A" target="_blank" rel="noopener" class="media-card media-book reveal reveal-d1">
+        <div class="media-card-tag">Book</div>
+        <div class="media-card-visual media-card-book">
+          <div class="media-book-cover">
+            <div class="media-book-title">Youth of the Nation</div>
+            <div class="media-book-author">DAVID KOZLOWSKI</div>
+          </div>
+        </div>
+        <h3 class="media-card-title">Youth of the Nation</h3>
+        <p class="media-card-body">The origin manifesto. How a high school suicide crisis revealed Social Health as the missing pillar — and what to do about it.</p>
+        <span class="media-card-link">Read the book <span>→</span></span>
+      </a>
+
+      <a href="https://www.ted.com/talks/david_kozlowski_be_a_better_parent_by_partnering_with_your_teen" target="_blank" rel="noopener" class="media-card reveal reveal-d2">
+        <div class="media-card-tag">TEDx Talk · 130K+ views</div>
+        <div class="media-card-visual media-card-ted">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="240" fill="#0f1311"/>
+            <rect x="40" y="180" width="100" height="36" rx="4" fill="#cc0000"/>
+            <text x="58" y="206" font-family="Inter Tight" font-weight="900" font-size="22" fill="#ffffff">TEDx</text>
+            <text x="40" y="50" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#b3853a" font-weight="600">PARENT-TEEN RELATIONSHIPS</text>
+            <circle cx="200" cy="120" r="32" fill="rgba(255,255,255,0.1)"/>
+            <path d="M192 108 L 216 120 L 192 132 Z" fill="#ffffff"/>
+          </svg>
+        </div>
+        <h3 class="media-card-title">"The Parent-Teen Connection"</h3>
+        <p class="media-card-body">David's TEDx talk on the relational mechanics that protect — or fail to protect — teens in the digital age.</p>
+        <span class="media-card-link">Watch the talk <span>→</span></span>
+      </a>
+
+      <a href="https://www.instagram.com/og.therapy" target="_blank" rel="noopener" class="media-card reveal reveal-d3">
+        <div class="media-card-tag">Podcast · Millions of downloads</div>
+        <div class="media-card-visual media-card-podcast">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="podGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1a7d5f"/>
+                <stop offset="1" stop-color="#0a5c44"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="240" fill="url(#podGrad)"/>
+            <g transform="translate(170,90)">
+              <rect x="0" y="20" width="6" height="20" rx="3" fill="#b3853a"/>
+              <rect x="12" y="10" width="6" height="40" rx="3" fill="#b3853a"/>
+              <rect x="24" y="0" width="6" height="60" rx="3" fill="#b3853a"/>
+              <rect x="36" y="14" width="6" height="32" rx="3" fill="#b3853a"/>
+              <rect x="48" y="22" width="6" height="16" rx="3" fill="#b3853a"/>
+            </g>
+            <text x="40" y="50" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="rgba(255,255,255,0.7)" font-weight="600">EPISODE LIBRARY</text>
+            <text x="40" y="200" font-family="Inter Tight" font-weight="700" font-size="22" fill="#ffffff">OG Therapy</text>
+          </svg>
+        </div>
+        <h3 class="media-card-title">OG Therapy Podcast</h3>
+        <p class="media-card-body">Formerly <em>Light the Fight</em>. Real-time coaching on the relational dynamics inside families, schools, and workplaces.</p>
+        <span class="media-card-link">Listen now <span>→</span></span>
+      </a>
+
+      <a href="https://kutv.com/news/local/new-social-health-class-at-herriman-high-may-expand-to-schools-across-utah" target="_blank" rel="noopener" class="media-card reveal reveal-d4">
+        <div class="media-card-tag">Press &amp; Media</div>
+        <div class="media-card-visual media-card-press">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="240" fill="#f7f7f5"/>
+            <g transform="translate(40,40)" fill="#0f1311">
+              <rect x="0" y="0" width="320" height="3" rx="1"/>
+              <rect x="0" y="14" width="240" height="3" rx="1" opacity="0.5"/>
+              <rect x="0" y="50" width="320" height="2" rx="1" opacity="0.3"/>
+              <rect x="0" y="60" width="300" height="2" rx="1" opacity="0.3"/>
+              <rect x="0" y="70" width="280" height="2" rx="1" opacity="0.3"/>
+              <rect x="0" y="90" width="320" height="2" rx="1" opacity="0.3"/>
+              <rect x="0" y="100" width="200" height="2" rx="1" opacity="0.3"/>
+              <rect x="0" y="130" width="2" height="32" fill="#b3853a"/>
+              <rect x="14" y="135" width="220" height="3" rx="1"/>
+              <rect x="14" y="148" width="180" height="2" rx="1" opacity="0.5"/>
+            </g>
+          </svg>
+        </div>
+        <h3 class="media-card-title">News &amp; Press Coverage</h3>
+        <p class="media-card-body">KUTV, NBC-KSL Studio 5, ESPN 700 Radio, and field interviews documenting the Social Health movement.</p>
+        <span class="media-card-link">View press kit <span>→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="callout-band reveal">
+  <div class="callout">
+    <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div><strong>Quick question.</strong> Could a stranger walk into your team meeting and tell who feels safe to speak? That's a Social Health diagnostic. The one below is more thorough.</div>
+  </div>
+</section>
+
+<section class="diagnostic" id="diagnostic">
+  <div class="diag-inner">
+    <div class="diag-head">
+      <div class="reveal">
+        <div class="section-eyebrow">Diagnostic</div>
+        <h2 class="diag-title">How <em>connected</em> is your organization?</h2>
+      </div>
+      <div class="reveal reveal-d2">
+        <p class="diag-intro">A four-question diagnostic drawn from the SHs Social Health Index. Takes 60 seconds. No email required.</p>
+      </div>
+    </div>
+    <div class="diag-wrap reveal reveal-d1">
+      <div class="diag-progress"><span class="active"></span><span></span><span></span><span></span></div>
+      <div class="diag-question" id="diag-question"></div>
+      <div class="diag-result" id="diag-result">
+        <div class="diag-result-label">Your Social Health Score</div>
+        <div class="diag-result-score" id="diag-score">—<span class="denom">/20</span></div>
+        <div class="diag-result-grade" id="diag-grade"></div>
+        <p class="diag-result-text" id="diag-text"></p>
+
+        <div class="diag-result-actions">
+          <a href="#cta" class="btn btn-primary">See what to do next <span class="btn-arrow">→</span></a>
+        </div>
+
+        <div class="diag-share">
+          <div class="diag-share-label">Share your Social Health Score</div>
+          <div class="diag-share-buttons">
+            <button class="share-btn" id="share-linkedin" aria-label="Share on LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+              LinkedIn
+            </button>
+            <button class="share-btn" id="share-twitter" aria-label="Share on X / Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X / Twitter
+            </button>
+            <button class="share-btn" id="share-copy" aria-label="Copy link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              <span id="copy-text">Copy link</span>
+            </button>
+          </div>
+        </div>
+
+        <a href="#" class="diag-restart" id="diag-restart">↻ Retake the diagnostic</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="insights" id="insights">
+  <div class="insights-inner">
+    <div class="insights-head">
+      <h2 class="insights-title reveal"><em>Research &amp; field notes</em> from a movement in motion.</h2>
+      <a href="article-dei-to-shs.html" class="insights-link reveal reveal-d2">All Insights →</a>
+    </div>
+    <div class="insights-grid">
+      <article class="insight-card feature reveal reveal-d1">
+        <div class="insight-img">
+          <svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="g1c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a5c44"/><stop offset="1" stop-color="#1a7d5f"/></linearGradient></defs>
+            <rect width="600" height="450" fill="url(#g1c)"/>
+            <g stroke="rgba(255,255,255,0.22)" stroke-width="1" fill="none"><circle cx="300" cy="225" r="60"/><circle cx="300" cy="225" r="110"/><circle cx="300" cy="225" r="160"/><circle cx="300" cy="225" r="210"/></g>
+            <circle cx="300" cy="225" r="14" fill="#b3853a"/>
+            <circle cx="190" cy="170" r="8" fill="#ffffff"/><circle cx="430" cy="200" r="8" fill="#ffffff"/><circle cx="380" cy="320" r="8" fill="#ffffff"/><circle cx="210" cy="290" r="8" fill="#ffffff"/>
+          </svg>
+          <span class="insight-tag">Field Research</span>
+        </div>
+        <div class="insight-content">
+          <div class="insight-meta"><span>From the Founder</span>May 2026</div>
+          <h3 class="insight-headline"><a href="article-dei-to-shs.html" style="color:inherit">From DEI to SHs: Why the future of inclusion is connection-centered</h3>
+          <p class="insight-dek">DEI programs are hitting the same wall — they're seen as compliance checkboxes, not catalysts for real connection. The relational infrastructure beneath them is what's actually missing.</a></p>
+          <span class="insight-readtime">8 min read</span>
+        </div>
+      </article>
+      <article class="insight-card reveal reveal-d2">
+        <div class="insight-img">
+          <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="380" fill="#0f1311"/>
+            <g stroke="#b3853a" stroke-width="2" fill="none"><path d="M40 280 Q 150 220 260 240 T 480 120 L 560 100"/><path d="M40 320 Q 150 280 260 290 T 480 240 L 560 220" stroke="rgba(179,133,58,0.4)"/></g>
+            <circle cx="480" cy="120" r="6" fill="#b3853a"/>
+            <text x="40" y="60" font-family="JetBrains Mono" font-size="11" letter-spacing="2" fill="#b3853a" font-weight="600">CONNECTION CURRENCY INDEX</text>
+          </svg>
+          <span class="insight-tag">Data</span>
+        </div>
+        <div class="insight-content">
+          <div class="insight-meta"><span>Workplace</span>Apr 2026</div>
+          <h3 class="insight-headline"><a href="article-360b-problem.html" style="color:inherit">The hidden cost of disconnected teams: a $360B problem</h3>
+          <p class="insight-dek">What Gallup data really tells us about manager–employee relationships and the productivity gap.</p>
+          <span class="insight-readtime">5 min read</span>
+        </div>
+      </article>
+      <article class="insight-card reveal reveal-d3">
+        <div class="insight-img">
+          <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="380" fill="#eeeeea"/>
+            <g fill="#0a5c44"><rect x="60" y="220" width="50" height="110"/><rect x="140" y="180" width="50" height="150"/><rect x="220" y="140" width="50" height="190"/><rect x="300" y="100" width="50" height="230"/><rect x="380" y="70" width="50" height="260"/></g>
+            <text x="60" y="60" font-family="JetBrains Mono" font-size="11" letter-spacing="2" fill="#0f1311" font-weight="600">YOUTH OUTCOMES BY YEAR</text>
+          </svg>
+          <span class="insight-tag">Case Study</span>
+        </div>
+        <div class="insight-content">
+          <div class="insight-meta"><span>Schools</span>Mar 2026</div>
+          <h3 class="insight-headline"><a href="article-herriman.html" style="color:inherit">Herriman, five years on: what we learned</h3>
+          <p class="insight-dek">A longitudinal look at the original SHs field site and the curriculum that became a national model.</p>
+          <span class="insight-readtime">6 min read</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="how-head reveal">
+      <div class="section-eyebrow">How It Works</div>
+      <h2 class="section-title">How SHs <em>operationalizes</em> connection.</h2>
+      <p style="font-size:16.5px;line-height:1.65;color:var(--ink-soft);max-width:560px;margin-top:20px;">We don't replace your systems — we add a relational layer to them. Social Health Intelligence integrated into HR, LMS, leadership, and communication workflows.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal reveal-d1">
+        <div class="step-num">01</div>
+        <div class="step-tag">Assess</div>
+        <div class="step-title">Diagnose your relational ecosystem</div>
+        <div class="step-body">Social Health audits map where connection breaks down across leadership, communication, and culture. We baseline what's measurable — trust, psychological safety, retention drivers.</div>
+      </div>
+      <div class="step reveal reveal-d2">
+        <div class="step-num">02</div>
+        <div class="step-tag">Integrate</div>
+        <div class="step-title">Embed Social Health Intelligence</div>
+        <div class="step-body">Our framework integrates into systems you already use — HRIS, LMS, onboarding, leadership development. No rip-and-replace. A relational layer over existing infrastructure.</div>
+      </div>
+      <div class="step reveal reveal-d3">
+        <div class="step-num">03</div>
+        <div class="step-tag">Accredit</div>
+        <div class="step-title">Become Social Health certified</div>
+        <div class="step-body">SHa accreditation is a public commitment to connection-centered culture. Peer-reviewed standards across leadership, professional practice, and community integration.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Build Your Social Health</div>
+    <h2 class="cta-headline">The collapse is real.<br>So is the <em>rebuild.</em></h2>
+    <p class="cta-sub">Social Health is the missing pillar of well-being — measurable, trainable, accreditable. Choose where you build first.</p>
+
+    <div class="cta-paths">
+      <a href="#diagnostic" class="cta-path">
+        <div class="cta-path-num">01</div>
+        <div class="cta-path-tag">For Individuals</div>
+        <h3 class="cta-path-title">Measure Your Social Health</h3>
+        <p class="cta-path-body">Take the 60-second diagnostic. Get your Social Health Score, your tier classification, and a personalized starting point.</p>
+        <span class="cta-path-arrow">→</span>
+      </a>
+      <a href="accreditation.html" class="cta-path featured">
+        <div class="cta-path-num">02</div>
+        <div class="cta-path-tag">For Organizations</div>
+        <h3 class="cta-path-title">Become Social Health Accredited</h3>
+        <p class="cta-path-body">SHa is a peer-reviewed, tier-based accreditation. The public signal that your culture is built on relational infrastructure — not compliance theater.</p>
+        <span class="cta-path-arrow">→</span>
+      </a>
+      <a href="contact.html" class="cta-path">
+        <div class="cta-path-num">03</div>
+        <div class="cta-path-tag">For Leaders &amp; Partners</div>
+        <h3 class="cta-path-title">Talk to a Social Health Architect</h3>
+        <p class="cta-path-body">A 30-minute conversation with our team about your organization's relational baseline and what accreditation would unlock.</p>
+        <span class="cta-path-arrow">→</span>
+      </a>
+    </div>
+
+    <p class="cta-footer">Or: <a href="https://a.co/d/08WzEr9A" target="_blank" rel="noopener">read David's book</a>, <a href="https://www.ted.com/talks/david_kozlowski_be_a_better_parent_by_partnering_with_your_teen" target="_blank" rel="noopener">watch the TEDx talk</a>, or <a href="https://www.instagram.com/og.therapy" target="_blank" rel="noopener">subscribe to OG Therapy</a>.</p>
+  </div>
+</section>
+
+<div class="sticky-ribbon" id="sticky">
+  <div class="sticky-text"><strong>What's your Social Health Score?</strong> 60-second diagnostic.</div>
+  <div class="sticky-actions">
+    <span class="sticky-time">4 questions</span>
+    <a href="#diagnostic" class="sticky-btn">Find out →</a>
+    <button class="sticky-close" id="sticky-close">×</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="./" class="brand">
+        <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none"><circle cx="11" cy="11" r="5" stroke="#ffffff" stroke-width="1.6"/><circle cx="21" cy="21" r="5" stroke="#b3853a" stroke-width="1.6"/><line x1="14.5" y1="14.5" x2="17.5" y2="17.5" stroke="#ffffff" stroke-width="1.6"/></svg></span>
+        <span style="color:#ffffff;">SHs <span class="brand-sub">Social Health Systems</span></span>
+      </a>
+      <p class="footer-brand-text">Building the infrastructure for human connection — in schools, in organizations, in society.</p>
+    </div>
+    <div class="footer-col"><h4>Framework</h4><ul><li><a href="article-dei-to-shs.html">What is Social Health</a></li><li><a href="index.html#vision">The Four Pillars</a></li><li><a href="article-dei-to-shs.html">From DEI to SHs</a></li><li><a href="index.html#insights">Research</a></li></ul></div>
+    <div class="footer-col"><h4>Programs</h4><ul><li><a href="accreditation.html">SHa Accreditation</a></li><li><a href="schools.html">Level Up Curriculum</a></li><li><a href="accreditation.html">Leadership Certification</a></li><li><a href="https://a.co/d/08WzEr9A" target="_blank" rel="noopener">Corporations of the Nation</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Newsletter</a></li><li><a href="https://www.instagram.com/og.therapy" target="_blank" rel="noopener">Podcast</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">Partner with us</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2011–2026 SHs — Social Health Systems</span>
+    <span>Connection Is Infrastructure™</span>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
+
+// ============ READING PROGRESS BAR ============
+const readingFill = document.getElementById('readingFill');
+function updateReadingProgress() {
+  const scrolled = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = Math.min(100, Math.max(0, (scrolled / docH) * 100));
+  readingFill.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateReadingProgress, { passive: true });
+updateReadingProgress();
+
+// ============ SECTION COUNTER ============
+const sectionCounter = document.getElementById('sectionCounter');
+const scNum = document.getElementById('scNum');
+const scLabel = document.getElementById('scLabel');
+const sectionLabels = {
+  'hero': 'Hero',
+  'trustbar': 'Featured On',
+  'route': 'Where to Start',
+  'statband': 'The Data',
+  'reframe': 'The Reframe',
+  'pillars': 'The Framework',
+  'compare': 'How SHs Differs',
+  'story': 'Origin Story',
+  'founder': 'Meet the Founder',
+  'pullquote': 'The Founder\'s Take',
+  'voices': 'Field Voices',
+  'media': 'More from David',
+  'diagnostic': 'Diagnostic',
+  'insights': 'Research',
+  'how': 'How It Works',
+  'cta': 'Build Your Social Health'
+};
+const allSections = Array.from(document.querySelectorAll('section'));
+const totalSections = allSections.length;
+// Update denom in counter
+document.querySelector('.section-counter-denom').textContent = `/${String(totalSections).padStart(2, '0')}`;
+
+const sectionIo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = allSections.indexOf(e.target);
+      const cls = e.target.className.split(' ').find(c => sectionLabels[c]) || e.target.id || 'Section';
+      const label = sectionLabels[cls] || sectionLabels[e.target.id] || 'Section';
+      scNum.textContent = String(idx + 1).padStart(2, '0');
+      scLabel.textContent = label;
+    }
+  });
+}, { threshold: 0.35, rootMargin: '-20% 0px -40% 0px' });
+allSections.forEach(s => sectionIo.observe(s));
+
+// Show counter after passing hero
+window.addEventListener('scroll', () => {
+  if (window.scrollY > window.innerHeight * 0.6) sectionCounter.classList.add('visible');
+  else sectionCounter.classList.remove('visible');
+}, { passive: true });
+
+// ============ SAVE YOUR PLACE PROMPT ============
+const savePrompt = document.getElementById('savePrompt');
+const savePromptClose = document.getElementById('savePromptClose');
+const savePromptForm = document.getElementById('savePromptForm');
+let saveDismissed = sessionStorage.getItem('shs-save-dismissed') === '1';
+let savePromptShown = false;
+
+window.addEventListener('scroll', () => {
+  if (saveDismissed || savePromptShown) return;
+  const scrolled = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = scrolled / docH;
+  // Show at 45% scroll — past the credibility section, before the CTA
+  if (pct > 0.45 && pct < 0.75) {
+    savePrompt.classList.add('visible');
+    savePromptShown = true;
+  }
+}, { passive: true });
+
+savePromptClose.addEventListener('click', () => {
+  savePrompt.classList.remove('visible');
+  saveDismissed = true;
+  sessionStorage.setItem('shs-save-dismissed', '1');
+});
+savePromptForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('savePromptEmail').value;
+  // In production: POST to your endpoint
+  savePrompt.classList.add('success');
+  setTimeout(() => {
+    savePrompt.classList.remove('visible');
+    saveDismissed = true;
+    sessionStorage.setItem('shs-save-dismissed', '1');
+  }, 2200);
+});
+
+// ============ ANIMATED STAT COUNTERS ============
+function animateNum(el, target, duration = 1400) {
+  const start = performance.now();
+  const isLargeNum = target >= 100;
+  const startVal = 0;
+  el.classList.add('counting');
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const val = Math.round(startVal + (target - startVal) * eased);
+    el.textContent = isLargeNum ? val.toLocaleString() : val;
+    if (t < 1) requestAnimationFrame(tick);
+    else el.classList.remove('counting');
+  }
+  requestAnimationFrame(tick);
+}
+
+const statIo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.animated) {
+      const numEl = e.target.querySelector('.stat-num');
+      if (!numEl) return;
+      
+      // Remove fn-ref elements before reading text (they corrupt textContent)
+      const fnRefs = numEl.querySelectorAll('.fn-ref');
+      const fnRefHTML = [];
+      fnRefs.forEach(ref => { fnRefHTML.push(ref.outerHTML); ref.remove(); });
+      
+      const raw = numEl.textContent.trim();
+      const m = raw.match(/^(\$?)(\d+)/);
+      if (m) {
+        const prefix = m[1];
+        const target = parseInt(m[2], 10);
+        const rest = raw.slice(m[0].length);
+        // Rebuild with animation span + restore fn-refs (hidden on mobile via CSS)
+        numEl.innerHTML = prefix + '<span class="num-anim">0</span>' + rest + fnRefHTML.join('');
+        const anim = numEl.querySelector('.num-anim');
+        animateNum(anim, target);
+      } else {
+        // Restore fn-refs if no match
+        fnRefHTML.forEach(h => numEl.insertAdjacentHTML('beforeend', h));
+      }
+      e.target.dataset.animated = '1';
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stat').forEach(s => statIo.observe(s));
+
+// ============ BRAND EASTER EGG ============
+const brandEgg = document.getElementById('brandEgg');
+const brandEggToast = document.getElementById('brandEggToast');
+const brandMark = brandEgg.querySelector('.brand-mark');
+let brandEggTimer = null;
+brandMark.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  brandEggToast.classList.add('visible');
+  clearTimeout(brandEggTimer);
+  brandEggTimer = setTimeout(() => brandEggToast.classList.remove('visible'), 3800);
+});
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const crossed = document.querySelector('.crossed');
+const crossIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); crossIo.unobserve(e.target); } }), { threshold: 0.5 });
+if (crossed) crossIo.observe(crossed);
+document.querySelectorAll('.vocab-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const detail = item.querySelector('.vocab-detail');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.vocab-item').forEach(i => { i.classList.remove('open'); i.querySelector('.vocab-detail').textContent = ''; });
+    if (!isOpen) { item.classList.add('open'); detail.textContent = item.dataset.detail; }
+  });
+});
+const sticky = document.getElementById('sticky');
+let stickyDismissed = sessionStorage.getItem('shi-sticky-dismissed-c') === '1';
+window.addEventListener('scroll', () => {
+  if (stickyDismissed) return;
+  const scrolled = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = scrolled / docH;
+  const ctaEl = document.getElementById('cta');
+  const ctaTop = ctaEl ? ctaEl.getBoundingClientRect().top + window.scrollY : Infinity;
+  const pastCTA = scrolled > ctaTop - window.innerHeight;
+  sticky.classList.toggle('show', pct > 0.18 && !pastCTA);
+});
+document.getElementById('sticky-close').addEventListener('click', () => {
+  sticky.classList.remove('show'); stickyDismissed = true;
+  sessionStorage.setItem('shi-sticky-dismissed-c', '1');
+});
+const QUESTIONS = [
+  { q: "When someone shares a problem at work, your team's first move is usually to —", options: [{label:'Jump to solutions or advice',val:1},{label:'Ask clarifying questions',val:2},{label:'Acknowledge feelings, then respond',val:4},{label:'Sit with them in it before anything else',val:5},{label:"Honestly — it depends who it is",val:3}]},
+  { q: "How often does leadership engage in face-to-face, non-transactional conversation with their teams?", options: [{label:'Rarely — meetings only',val:1},{label:'Quarterly, structured',val:2},{label:'Monthly, mixed',val:3},{label:'Weekly, intentional',val:4},{label:'It is the operating rhythm',val:5}]},
+  { q: "When something goes wrong, the cultural default in your organization is —", options: [{label:'Find who is to blame',val:1},{label:'Document and move on',val:2},{label:'Process the system failure',val:3},{label:'Repair the relationship first',val:4},{label:'Connection before concern — every time',val:5}]},
+  { q: "Could a new hire describe your culture in their own words after 30 days?", options: [{label:'They would describe the work, not the culture',val:1},{label:'They would use generic words',val:2},{label:'They would name a few values',val:3},{label:'They would speak our shared language',val:4},{label:'Yes — and they would already be living it',val:5}]},
+];
+const GRADES = [
+  { min: 17, label: 'Connection-Centered', text: 'Your culture is operating at a high relational frequency. SHs can help you formalize, certify, and scale what you already do well.' },
+  { min: 12, label: 'Connection-Aware', text: 'You see the importance of connection — but it lives in pockets, not infrastructure. SHs turns intuition into operating system.' },
+  { min: 7, label: 'Connection-Fragile', text: "You're experiencing the early warning signs of a connection collapse: trust erosion, disengagement, retention drag. This is the window to act." },
+  { min: 0, label: 'Connection-Critical', text: "You're in a relational deficit. The good news: this is the most addressable form of organizational pain. SHs was built for exactly this moment." },
+];
+const qEl = document.getElementById('diag-question'), rEl = document.getElementById('diag-result');
+const progressEls = document.querySelectorAll('.diag-progress span');
+let qIdx = 0, total = 0;
+function renderQuestion() {
+  if (qIdx >= QUESTIONS.length) return renderResult();
+  const q = QUESTIONS[qIdx];
+  progressEls.forEach((p, i) => { p.classList.remove('active','done'); if (i < qIdx) p.classList.add('done'); else if (i === qIdx) p.classList.add('active'); });
+  qEl.style.display = 'block'; rEl.classList.remove('show');
+  qEl.innerHTML = `<div class="diag-qnum">Question ${qIdx+1} of ${QUESTIONS.length}</div><div class="diag-qtext">${q.q}</div><div class="diag-options">${q.options.map((o,i)=>`<button class="diag-opt" data-val="${o.val}"><span class="diag-opt-val">0${i+1}</span><span>${o.label}</span></button>`).join('')}</div>`;
+  qEl.querySelectorAll('.diag-opt').forEach(btn => btn.addEventListener('click', () => { total += parseInt(btn.dataset.val,10); qIdx++; qEl.style.opacity = 0; setTimeout(() => { renderQuestion(); qEl.style.opacity = 1; }, 220); }));
+}
+function renderResult() {
+  progressEls.forEach(p => { p.classList.remove('active'); p.classList.add('done'); });
+  qEl.style.display = 'none'; rEl.classList.add('show');
+  document.getElementById('diag-score').innerHTML = `${total}<span class="denom">/20</span>`;
+  const grade = GRADES.find(g => total >= g.min);
+  document.getElementById('diag-grade').textContent = grade.label;
+  document.getElementById('diag-text').textContent = grade.text;
+}
+document.getElementById('diag-restart').addEventListener('click', e => { e.preventDefault(); qIdx=0; total=0; renderQuestion(); });
+
+// Share handlers
+function getShareText() {
+  const grade = GRADES.find(g => total >= g.min);
+  return `My Social Health Score: ${total}/20 — ${grade.label}. Take the diagnostic from Social Health Systems and find out what's behind today's connection collapse.`;
+}
+document.getElementById('share-linkedin').addEventListener('click', () => {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`, '_blank', 'width=600,height=600');
+});
+document.getElementById('share-twitter').addEventListener('click', () => {
+  const text = encodeURIComponent(getShareText());
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=600');
+});
+document.getElementById('share-copy').addEventListener('click', async (e) => {
+  const btn = e.currentTarget;
+  const txt = document.getElementById('copy-text');
+  try {
+    await navigator.clipboard.writeText(window.location.href + '#diagnostic');
+    btn.classList.add('copied');
+    txt.textContent = 'Copied!';
+    setTimeout(() => { btn.classList.remove('copied'); txt.textContent = 'Copy link'; }, 2000);
+  } catch (err) {
+    txt.textContent = 'Copy failed';
+  }
+});
+
+qEl.style.transition = 'opacity 0.22s ease';
+renderQuestion();
+</script>
+</body>
+</html>
